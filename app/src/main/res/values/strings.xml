@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Track Mate</string>
+    <string name="student_late_info">%s</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="add">Add</string>
+    <string name="home">Home</string>
+    <string name="cancel">Cancel</string>
+    <string name="setting">Settings</string>
+    <string name="search">Search</string>
+    <string name="empty_screen">empty_screen</string>
+    <string name="no_results">No Results</string>
+    <string name="personals">Personals</string>
+    <string name="descriptions">Descriptions</string>
+    <string name="given_times">Given Times</string>
+    <string name="add_information_screen">Add Information</string>
+    <string name="delete_information_screen">Delete Information</string>
+    <string name="done">Done</string>
+    <string name="exit">EXIT</string>
+    <string name="make_sure_to_fill_in_at_least_one_field">Make sure to fill in at least one field</string>
+    <string name="successfully_uploaded">Successfully uploaded</string>
+    <string name="sections">Sections</string>
+    <string name="results">Results</string>
+
+    <!-- Common -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="generic_error">Something wrong happened. Please try again.</string>
+    <string name="email_error">Please insert a valid email.</string>
+    <string name="try_again">Try again</string>
+
+    <!-- LoginScreen -->
+    <string name="sign_in">Sign in</string>
+    <string name="login_details">Enter your login details</string>
+    <string name="forgot_password">Forgot password? Click to get recovery email</string>
+    <string name="recovery_email_sent">Check your inbox for the recovery email.</string>
+    <string name="empty_password_error">Password cannot be empty.</string>
+
+    <!-- SignUpScreen -->
+    <string name="sign_up">Sign Up</string>
+    <string name="create_account">Create account</string>
+    <string name="password_error">Your password should have at least six digits and include one digit, one lower case letter and one upper case letter.</string>
+    <string name="password_match_error">Passwords do not match.</string>
+    <string name="already_added">You already added this item</string>
+    <string name="maximum_size_message">You reached the maximum number of items to delete</string>
+    <string name="your_file_save_as_csv">Your file save as %s.csv</string>
+</resources>
