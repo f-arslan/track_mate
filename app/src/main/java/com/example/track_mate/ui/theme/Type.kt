@@ -17,7 +17,7 @@ val Athiti = FontFamily(
 
 // Set of Material typography styles to start with
 val Typography = Typography(
-    bodyLarge = TextStyle(
+/*    bodyLarge = TextStyle(
         fontFamily = Athiti,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
@@ -121,5 +121,5 @@ val Typography = Typography(
         fontSize = 11.sp,
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
-    )
+    )*/
 )

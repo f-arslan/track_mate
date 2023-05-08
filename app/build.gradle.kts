@@ -69,11 +69,13 @@ dependencies {
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
 
-    // Hilt - ViewModel - Size Class
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation)
     implementation(libs.viewModel)
     implementation(libs.windowSizeClass)
     implementation(libs.navigation)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.opencsv)
 }
 
 kapt {

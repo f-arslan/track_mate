@@ -471,7 +471,7 @@ public class LibrariesForLibs extends AbstractExternalDependencyFactory {
         public ComAndroidVersionAccessors(ProviderFactory providers, DefaultVersionCatalog config) { super(providers, config); }
 
             /**
-             * Returns the version associated to this alias: com.android.application (8.1.0-alpha11)
+             * Returns the version associated to this alias: com.android.application (8.2.0-alpha02)
              * If the version is a rich version and that its not expressible as a
              * single version string, then an empty string is returned.
              * This version was declared in catalog libs.versions.toml
