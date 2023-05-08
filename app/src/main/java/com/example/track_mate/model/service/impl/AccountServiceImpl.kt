@@ -1,9 +1,8 @@
 package com.example.track_mate.model.service.impl
 
-import com.example.student_management_system.model.User
-import com.example.student_management_system.model.service.AccountService
-import com.example.student_management_system.model.trace
-import com.example.track_mate.model.service.User
+import com.example.track_mate.model.User
+import com.example.track_mate.model.service.AccountService
+import com.example.track_mate.model.trace
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.channels.awaitClose

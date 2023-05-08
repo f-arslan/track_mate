@@ -16,7 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.example.track_mate.R
-import com.example.track_mate.model.service.ActionStatus
+import com.example.track_mate.model.ActionStatus
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.R.drawable as AppIcon
 

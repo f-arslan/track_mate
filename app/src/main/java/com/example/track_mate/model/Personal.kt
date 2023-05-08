@@ -1,4 +1,4 @@
-package com.example.track_mate.model.service
+package com.example.track_mate.model
 
 import androidx.compose.runtime.Immutable
 import java.util.UUID
@@ -7,4 +7,4 @@ import java.util.UUID
 data class Personal(
     override val id: String = UUID.randomUUID().toString(),
     override val name: String = ""
-):ListItem
+): ListItem

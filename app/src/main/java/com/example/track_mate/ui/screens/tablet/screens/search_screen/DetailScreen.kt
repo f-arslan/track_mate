@@ -4,7 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.track_mate.model.service.Student
+import com.example.track_mate.common.composables.ActionGrid
+import com.example.track_mate.common.composables.EmptyScreen
+import com.example.track_mate.model.Action
+import com.example.track_mate.model.Student
 import com.example.track_mate.ui.screens.RequestState
 import com.example.track_mate.ui.screens.view_models.DetailScreenViewModel
 

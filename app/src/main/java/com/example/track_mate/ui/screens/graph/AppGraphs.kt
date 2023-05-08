@@ -8,14 +8,12 @@ import com.example.track_mate.HOME_SCREEN_TABLET
 import com.example.track_mate.SEARCH_SCREEN_TABLET
 import com.example.track_mate.SETTING_SCREEN_TABLET
 import com.example.track_mate.TrackMateAppState
-import com.example.track_mate.model.service.Student
+import com.example.track_mate.model.Student
 import com.example.track_mate.ui.screens.tablet.screens.home_screen.HomeScreenTablet
+import com.example.track_mate.ui.screens.tablet.screens.search_screen.AddActionScreen
+import com.example.track_mate.ui.screens.tablet.screens.search_screen.DetailScreen
 import com.example.track_mate.ui.screens.tablet.screens.search_screen.SearchScreenTablet
 import com.example.track_mate.ui.screens.tablet.screens.setting_screen.SettingScreenTablet
-import com.example.track_mate.ui.screens.view_models.SearchScreenViewModel
-import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.internal.lifecycle.HiltViewModelMap
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 
 fun NavGraphBuilder.tabletGraph() {

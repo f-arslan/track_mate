@@ -1,7 +1,7 @@
 package com.example.track_mate.use_cases
 
 import android.content.Context
-import com.example.track_mate.model.service.Action
+import com.example.track_mate.model.Action
 import com.opencsv.CSVWriter
 import java.io.File
 import java.io.FileWriter

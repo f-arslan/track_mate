@@ -1,6 +1,10 @@
 package com.example.track_mate.model.service.module
 
+import com.example.track_mate.model.service.AccountService
+import com.example.track_mate.model.service.LogService
 import com.example.track_mate.model.service.StorageService
+import com.example.track_mate.model.service.impl.AccountServiceImpl
+import com.example.track_mate.model.service.impl.LogServiceImpl
 import com.example.track_mate.model.service.impl.StorageServiceImpl
 import dagger.Binds
 import dagger.Module

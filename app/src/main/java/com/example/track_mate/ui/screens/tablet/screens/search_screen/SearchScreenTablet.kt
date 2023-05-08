@@ -23,8 +23,9 @@ import com.example.track_mate.ADD_ACTION_SCREEN_TABLET
 import com.example.track_mate.common.composables.EmptyScreen
 import com.example.track_mate.common.composables.AppTopBar
 import com.example.track_mate.common.composables.FloatingActionButtonApp
-import com.example.track_mate.model.service.Student
+import com.example.track_mate.model.Student
 import com.example.track_mate.rememberAppState
+import com.example.track_mate.ui.screens.graph.searchScreenGraph
 import com.example.track_mate.ui.screens.view_models.SearchScreenViewModel
 import com.example.track_mate.ui.screens.view_models.UiState
 import com.example.track_mate.util.Constants.HIGH_PADDING
@@ -102,7 +103,7 @@ fun DetailSectionTablet(
             navController = appState.navController,
             startDestination = ACTION_DETAIL_SCREEN_TABLET
         ) {
-            stmsSearchScreenGraph(appState, student)
+            searchScreenGraph(appState, student)
         }
     }
 }

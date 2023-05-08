@@ -1,4 +1,4 @@
-package com.example.track_mate.model.service
+package com.example.track_mate.model
 
 import javax.annotation.concurrent.Immutable
 

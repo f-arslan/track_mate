@@ -1,10 +1,10 @@
 package com.example.track_mate.ui.screens.view_models
 
 import androidx.lifecycle.viewModelScope
-import com.example.track_mate.model.service.Action
-import com.example.track_mate.model.service.ActionStatus
+import com.example.track_mate.model.Action
+import com.example.track_mate.model.ActionStatus
 import com.example.track_mate.model.service.StorageService
-import com.example.track_mate.model.service.Student
+import com.example.track_mate.model.Student
 import com.example.track_mate.model.service.module.FirebaseNodes
 import com.example.track_mate.ui.screens.RequestState
 import com.example.track_mate.use_cases.calculateTotalTimeOutside

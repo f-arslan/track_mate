@@ -1,4 +1,4 @@
-package com.example.track_mate.model.service
+package com.example.track_mate.model
 
 import androidx.compose.runtime.Immutable
 import java.util.UUID
