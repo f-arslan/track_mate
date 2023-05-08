@@ -38,6 +38,7 @@ hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", v
 viewModel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "viewModel" }
 windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "windowSizeClass" }
 navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
+
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "com-android-application" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
