@@ -1,5 +1,7 @@
 package com.example.track_mate.common.composables
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,6 +13,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -59,4 +62,14 @@ fun ActionButtons(status: ActionStatus, onApproveClick: () -> Unit, onDeleteClic
             )
         }
     }
+}
+
+@Composable
+fun AppExtendedButton(
+    modifier: Modifier = Modifier, @StringRes text: Int, @DrawableRes icon: Int, onClick: () -> Unit
+) {
+    ExtendedFloatingActionButton(onClick = onClick,
+        modifier = modifier,
+        text = { Text(stringResource(text)) },
+        icon = { Icon(painterResource(icon), contentDescription = null) })
 }

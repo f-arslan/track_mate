@@ -29,12 +29,11 @@ import com.example.track_mate.model.Student
 import com.example.track_mate.rememberAppState
 import com.example.track_mate.ui.screens.graph.searchScreenGraph
 import com.example.track_mate.ui.screens.view_models.SearchScreenViewModel
-import com.example.track_mate.ui.screens.view_models.UiState
+import com.example.track_mate.ui.screens.view_models.SettingUiState
 import com.example.track_mate.util.Constants.HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.NO_PADDING
-import com.example.track_mate.util.Constants.VERY_HIGH_PADDING
 
 @Composable
 fun SearchScreenTablet(viewModel: SearchScreenViewModel = hiltViewModel()) {
@@ -43,7 +42,7 @@ fun SearchScreenTablet(viewModel: SearchScreenViewModel = hiltViewModel()) {
     Row(
         Modifier
             .fillMaxSize()
-            .padding(VERY_HIGH_PADDING)
+            .padding(HIGH_PADDING)
     ) {
 
         SearchSection(
@@ -115,7 +114,7 @@ fun DetailSectionTablet(
 @Composable
 fun SearchSection(
     modifier: Modifier = Modifier,
-    uiState: UiState,
+    uiState: SettingUiState,
     firstTenStudents: List<Student>,
     onSearchBarTextChange: (String) -> Unit,
     onStudentClick: (Student) -> Unit,

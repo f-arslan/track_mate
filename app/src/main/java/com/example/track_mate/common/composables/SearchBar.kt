@@ -54,7 +54,7 @@ fun AppSearchBar(
             when (trailingIconState) {
                 true -> {
                     Icon(
-                        painter = painterResource(AppIcon.baseline_search_24),
+                        painter = painterResource(AppIcon.outline_cancel_24),
                         modifier = Modifier.clickable {
                             onValueChange("")
                             onCancel()
@@ -68,13 +68,6 @@ fun AppSearchBar(
             }
         },
         singleLine = true,
-        colors = TextFieldDefaults.textFieldColors(
-            // TODO: work on this section
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent,
-            errorIndicatorColor = Color.Transparent,
-        ),
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Text,
