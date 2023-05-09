@@ -16,6 +16,7 @@ import com.example.track_mate.ui.screens.tablet.screens.home_screen.HomeScreenTa
 import com.example.track_mate.ui.screens.tablet.screens.search_screen.AddActionScreen
 import com.example.track_mate.ui.screens.tablet.screens.search_screen.DetailScreen
 import com.example.track_mate.ui.screens.tablet.screens.search_screen.SearchScreenTablet
+import com.example.track_mate.ui.screens.tablet.screens.setting_screen.AddInformationScreen
 import com.example.track_mate.ui.screens.tablet.screens.setting_screen.SettingPresentationScreen
 import com.example.track_mate.ui.screens.tablet.screens.setting_screen.SettingScreenTablet
 

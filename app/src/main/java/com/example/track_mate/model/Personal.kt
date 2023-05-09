@@ -7,4 +7,4 @@ import java.util.UUID
 data class Personal(
     override val id: String = UUID.randomUUID().toString(),
     override val name: String = ""
-): ListItem
+): DeleteListItem
