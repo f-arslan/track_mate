@@ -3,10 +3,12 @@ plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     kotlin("kapt")
+    id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("com.google.firebase.firebase-perf")
 }
+
 
 android {
     namespace = "com.example.track_mate"
@@ -54,6 +56,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation(libs.core.ktx)
@@ -64,11 +67,11 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
-    implementation("com.google.firebase:firebase-database-ktx:20.2.1")
-    implementation("com.google.firebase:firebase-auth-ktx:22.0.0")
-    implementation("com.google.firebase:firebase-crashlytics-ktx:18.3.7")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.2.2")
-    implementation("com.google.firebase:firebase-perf-ktx:20.3.2")
+    implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.crashlytics.ktx)
+    implementation(libs.firebase.analytics.ktx)
+    implementation(libs.firebase.perf.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -78,14 +81,13 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
 
     implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation)
+    kapt(libs.hilt.android.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
     implementation(libs.viewModel)
     implementation(libs.windowSizeClass)
     implementation(libs.navigation)
-    kapt(libs.hilt.android.compiler)
     implementation(libs.opencsv)
 }
-
 kapt {
     correctErrorTypes = true
 }

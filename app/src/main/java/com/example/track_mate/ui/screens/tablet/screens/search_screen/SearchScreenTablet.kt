@@ -20,8 +20,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import com.example.track_mate.ACTION_DETAIL_SCREEN_TABLET
 import com.example.track_mate.ADD_ACTION_SCREEN_TABLET
-import com.example.track_mate.common.composables.EmptyScreen
+import com.example.track_mate.common.composables.AppSearchBar
+import com.example.track_mate.common.composables.AppSearchList
 import com.example.track_mate.common.composables.AppTopBar
+import com.example.track_mate.common.composables.EmptyScreen
 import com.example.track_mate.common.composables.FloatingActionButtonApp
 import com.example.track_mate.model.Student
 import com.example.track_mate.rememberAppState
@@ -40,8 +42,9 @@ fun SearchScreenTablet(viewModel: SearchScreenViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState
     Row(
         Modifier
-        .fillMaxSize()
-        .padding(VERY_HIGH_PADDING)) {
+            .fillMaxSize()
+            .padding(VERY_HIGH_PADDING)
+    ) {
 
         SearchSection(
             modifier = Modifier
@@ -56,8 +59,8 @@ fun SearchScreenTablet(viewModel: SearchScreenViewModel = hiltViewModel()) {
 
         Divider(
             Modifier
-            .width(HIGH_PADDING)
-            .height(NO_PADDING)
+                .width(HIGH_PADDING)
+                .height(NO_PADDING)
         )
 
         Card(
@@ -90,11 +93,9 @@ fun DetailSectionTablet(
             )
         },
         floatingActionButton = {
-            FloatingActionButtonApp(
-                onClick = {
-                    appState.navigate(ADD_ACTION_SCREEN_TABLET)
-                }
-            )
+            FloatingActionButtonApp(onClick = {
+                appState.navigate(ADD_ACTION_SCREEN_TABLET)
+            })
         },
         floatingActionButtonPosition = FabPosition.End,
     ) {
@@ -103,7 +104,10 @@ fun DetailSectionTablet(
             navController = appState.navController,
             startDestination = ACTION_DETAIL_SCREEN_TABLET
         ) {
-            searchScreenGraph(appState, student)
+            searchScreenGraph(
+                appState,
+                student
+            )
         }
     }
 }
@@ -122,14 +126,14 @@ fun SearchSection(
         shape = RoundedCornerShape(MEDIUM_PADDING),
     ) {
         Column(modifier = Modifier.padding(MEDIUM_HIGH_PADDING)) {
-            StmsSearchBar(
+            AppSearchBar(
                 value = uiState.textState,
                 trailingIconState = uiState.trailingIconState,
                 onValueChange = onSearchBarTextChange,
                 onCancel = onCancel
             )
             if (firstTenStudents.isNotEmpty()) {
-                SearchList(
+                AppSearchList(
                     firstTenStudents = firstTenStudents,
                     onStudentClick = onStudentClick
                 )
