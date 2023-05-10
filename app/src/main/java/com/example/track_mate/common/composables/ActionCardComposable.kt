@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -67,17 +68,20 @@ fun ActionCard(action: Action, onApproveClick: () -> Unit, onDeleteClick: () -> 
 fun ActionStatusRow(
     name: String, status: ActionStatus
 ) {
+    val color = when(status) {
+        ActionStatus.ON_GOING -> MaterialTheme.colorScheme.primaryContainer
+        ActionStatus.COMPLETE -> MaterialTheme.colorScheme.tertiaryContainer
+    }
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(if (status == ActionStatus.ON_GOING) Blue else Gray)
+            .background(color)
             .padding(SMALL_PADDING),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
         Text(
             text = name,
-            color = Color.White,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )

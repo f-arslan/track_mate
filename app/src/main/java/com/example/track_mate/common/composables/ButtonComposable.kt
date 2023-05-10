@@ -4,6 +4,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
@@ -18,20 +20,29 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import com.example.track_mate.R
 import com.example.track_mate.model.ActionStatus
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
+import com.example.track_mate.util.Constants.SMALL_PADDING
 import com.example.track_mate.R.drawable as AppIcon
 
 @Composable
 fun FloatingActionButtonApp(
     onClick: () -> Unit
 ) {
-    ExtendedFloatingActionButton(text = {
-        Text(text = stringResource(R.string.add), fontWeight = FontWeight.SemiBold)
-    },
+    ExtendedFloatingActionButton(
+        text = {
+            Text(
+                text = stringResource(R.string.add),
+                fontWeight = FontWeight.SemiBold
+            )
+        },
         icon = {
-            Icon(imageVector = Icons.Outlined.Edit, contentDescription = null)
+            Icon(
+                imageVector = Icons.Outlined.Edit,
+                contentDescription = null
+            )
         },
         shape = RoundedCornerShape(MEDIUM_PADDING),
         onClick = onClick
@@ -54,7 +65,10 @@ fun ActionButtons(status: ActionStatus, onApproveClick: () -> Unit, onDeleteClic
                 )
             }
         }
-        OutlinedButton(onClick = onDeleteClick, shape = RoundedCornerShape(MEDIUM_PADDING)) {
+        OutlinedButton(
+            onClick = onDeleteClick,
+            shape = RoundedCornerShape(MEDIUM_PADDING)
+        ) {
             Icon(
                 painterResource(AppIcon.outline_cancel_24),
                 contentDescription = null,
@@ -71,5 +85,44 @@ fun AppExtendedButton(
     ExtendedFloatingActionButton(onClick = onClick,
         modifier = modifier,
         text = { Text(stringResource(text)) },
-        icon = { Icon(painterResource(icon), contentDescription = null) })
+        icon = {
+            Icon(
+                painterResource(icon),
+                contentDescription = null
+            )
+        })
 }
+
+
+@Composable
+fun DeleteUploadButton(
+    onClick: () -> Unit = {}
+) {
+    Button(
+        shape = RoundedCornerShape(SMALL_PADDING),
+        onClick = onClick
+    ) {
+        Icon(
+            painter = painterResource(AppIcon.baseline_delete_outline_24),
+            contentDescription = null
+        )
+    }
+}
+
+private val buttonWidth = 250.dp
+private val buttonHeight = 50.dp
+
+@Composable
+fun DeleteSectionButton(
+    @StringRes text: Int, enabled: Boolean = true, onClick: () -> Unit = {}
+) {
+    Button(
+        modifier = Modifier.width(buttonWidth).height(buttonHeight),
+        enabled = enabled,
+        shape = RoundedCornerShape(SMALL_PADDING),
+        onClick = onClick
+    ) {
+        Text(text = stringResource(text))
+    }
+}
+

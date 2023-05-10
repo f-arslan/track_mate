@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.track_mate.model.Action
+import com.example.track_mate.util.Constants.BOTTOM_NAV_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING
@@ -43,6 +44,29 @@ fun ActionGrid(
                 finishActionClick(item)
                 isScrollable = true
             }, onDeleteClick = { deleteActionClick(item.id) })
+        }
+    }
+}
+
+@Composable
+fun DetailGridPhone(
+    items: List<Action>
+) {
+    if (items.isEmpty()) {
+        EmptyScreen()
+        return
+    }
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(1),
+        contentPadding = PaddingValues(
+            start = MEDIUM_PADDING,
+            end = MEDIUM_PADDING,
+            top = MEDIUM_PADDING,
+            bottom = BOTTOM_NAV_PADDING
+        )
+    ) {
+        items(items = items, key = { it.id }) {
+            ActionCardPhone(action = it)
         }
     }
 }

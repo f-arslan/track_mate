@@ -2,23 +2,28 @@ package com.example.track_mate.ui.screens.graph
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.track_mate.ACTION_DETAIL_SCREEN_TABLET
 import com.example.track_mate.ADD_ACTION_SCREEN_TABLET
 import com.example.track_mate.ADD_INFORMATION_SCREEN_TABLET
 import com.example.track_mate.DELETE_INFORMATION_SCREEN_TABLET
+import com.example.track_mate.HOME_SCREEN_PHONE
 import com.example.track_mate.HOME_SCREEN_TABLET
 import com.example.track_mate.PRESENTATION_SCREEN_TABLET
+import com.example.track_mate.SEARCH_SCREEN_PHONE
 import com.example.track_mate.SEARCH_SCREEN_TABLET
 import com.example.track_mate.SETTING_SCREEN_TABLET
 import com.example.track_mate.TrackMateAppState
 import com.example.track_mate.model.Student
-import com.example.track_mate.ui.screens.tablet.screens.home_screen.HomeScreenTablet
-import com.example.track_mate.ui.screens.tablet.screens.search_screen.AddActionScreen
-import com.example.track_mate.ui.screens.tablet.screens.search_screen.DetailScreen
-import com.example.track_mate.ui.screens.tablet.screens.search_screen.SearchScreenTablet
-import com.example.track_mate.ui.screens.tablet.screens.setting_screen.AddInformationScreen
-import com.example.track_mate.ui.screens.tablet.screens.setting_screen.SettingPresentationScreen
-import com.example.track_mate.ui.screens.tablet.screens.setting_screen.SettingScreenTablet
+import com.example.track_mate.ui.screens.phone.home_screen.HomeScreenPhone
+import com.example.track_mate.ui.screens.tablet.home_screen.HomeScreenTablet
+import com.example.track_mate.ui.screens.tablet.search_screen.AddActionScreen
+import com.example.track_mate.ui.screens.tablet.search_screen.DetailScreen
+import com.example.track_mate.ui.screens.tablet.search_screen.SearchScreenTablet
+import com.example.track_mate.ui.screens.tablet.setting_screen.AddInformationScreen
+import com.example.track_mate.ui.screens.tablet.setting_screen.DeleteInformationScreen
+import com.example.track_mate.ui.screens.tablet.setting_screen.SettingPresentationScreen
+import com.example.track_mate.ui.screens.tablet.setting_screen.SettingScreenTablet
 
 
 fun NavGraphBuilder.tabletGraph() {
@@ -56,5 +61,17 @@ fun NavGraphBuilder.settingScreenGraph(appState: TrackMateAppState) {
     }
     composable(DELETE_INFORMATION_SCREEN_TABLET) {
         DeleteInformationScreen()
+    }
+}
+
+fun NavGraphBuilder.phoneGraph() {
+    composable(SEARCH_SCREEN_PHONE.route) {
+        val searchScreenNavController = rememberNavController()
+        SearchScreenNavGraphPhone(
+            navController = searchScreenNavController
+        )
+    }
+    composable(HOME_SCREEN_PHONE.route) {
+        HomeScreenPhone()
     }
 }

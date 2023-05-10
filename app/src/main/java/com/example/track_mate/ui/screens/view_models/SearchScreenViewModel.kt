@@ -28,7 +28,7 @@ class SearchScreenViewModel @Inject constructor(
 
     private val _firstTenStudents = MutableStateFlow<List<Student>>(emptyList())
     val firstTenStudents: StateFlow<List<Student>> = _firstTenStudents
-    val uiState = mutableStateOf(SettingUiState())
+    val uiState = mutableStateOf(UiState())
 
     init {
         getStudents()
@@ -42,7 +42,7 @@ class SearchScreenViewModel @Inject constructor(
         }
     }
 
-    fun getStudentsWithQuery(query: String) {
+    private fun getStudentsWithQuery(query: String) {
         if (_students.value.isEmpty()) {
             return
         }
@@ -67,7 +67,7 @@ class SearchScreenViewModel @Inject constructor(
     }
 
     fun onCancel() {
-        uiState.value = SettingUiState()
+        uiState.value = UiState()
         _firstTenStudents.value = emptyList()
     }
 }
