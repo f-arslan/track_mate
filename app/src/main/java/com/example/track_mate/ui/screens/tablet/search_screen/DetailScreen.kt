@@ -17,7 +17,7 @@ fun DetailScreen(
     student: Student,
     detailScreenViewModelApp: DetailScreenViewModel = hiltViewModel()
 ) {
-    detailScreenViewModelApp.initStudent(student)
+    detailScreenViewModelApp.initStudent(student.id)
     val allActions by detailScreenViewModelApp.allActions.collectAsState()
     when (allActions) {
         is RequestState.Success -> {

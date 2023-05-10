@@ -9,7 +9,7 @@ import com.example.track_mate.rememberAppState
 import com.example.track_mate.ui.screens.graph.tabletGraph
 
 @Composable
-fun TabletScreen() {
+fun TabletApp() {
     val appState = rememberAppState()
     Row {
         AppNavRail(appState::clearAndNavigate)

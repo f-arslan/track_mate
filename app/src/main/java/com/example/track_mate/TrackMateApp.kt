@@ -16,7 +16,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.track_mate.common.snackbar.SnackbarManager
-import com.example.track_mate.ui.screens.tablet.TabletScreen
+import com.example.track_mate.ui.screens.phone.PhoneApp
+import com.example.track_mate.ui.screens.tablet.TabletApp
 import com.example.track_mate.ui.theme.TrackMateTheme
 import kotlinx.coroutines.CoroutineScope
 
@@ -29,7 +30,8 @@ fun TrackMateApp(widthSizeClass: WindowWidthSizeClass, heighthSizeClass: WindowH
             color = MaterialTheme.colorScheme.background
         ) {
             val isTabletScreen = widthSizeClass == WindowWidthSizeClass.Expanded
-            if (isTabletScreen) TabletScreen()
+            if (isTabletScreen) TabletApp()
+            else PhoneApp()
         }
     }
 }

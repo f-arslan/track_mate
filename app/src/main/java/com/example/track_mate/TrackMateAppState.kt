@@ -49,4 +49,8 @@ class TrackMateAppState(
             popUpTo(0) { inclusive = true }
         }
     }
+
+    fun navigateWithArgument(route: String, argument: String) {
+        navController.navigate("$route/$argument") { launchSingleTop = true }
+    }
 }

@@ -1,8 +1,10 @@
 package com.example.track_mate.ui.screens.graph
 
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.track_mate.ACTION_DETAIL_SCREEN_PHONE
 import com.example.track_mate.ACTION_DETAIL_SCREEN_TABLET
 import com.example.track_mate.ADD_ACTION_SCREEN_TABLET
 import com.example.track_mate.ADD_INFORMATION_SCREEN_TABLET
@@ -16,6 +18,8 @@ import com.example.track_mate.SETTING_SCREEN_TABLET
 import com.example.track_mate.TrackMateAppState
 import com.example.track_mate.model.Student
 import com.example.track_mate.ui.screens.phone.home_screen.HomeScreenPhone
+import com.example.track_mate.ui.screens.phone.search_screen.DetailScreenPhone
+import com.example.track_mate.ui.screens.phone.search_screen.SearchScreenPhone
 import com.example.track_mate.ui.screens.tablet.home_screen.HomeScreenTablet
 import com.example.track_mate.ui.screens.tablet.search_screen.AddActionScreen
 import com.example.track_mate.ui.screens.tablet.search_screen.DetailScreen
@@ -44,9 +48,15 @@ fun NavGraphBuilder.searchScreenGraph(appState: TrackMateAppState, student: Stud
     }
 
     composable(ADD_ACTION_SCREEN_TABLET) {
-        AddActionScreen(navigateAndPopUp = { route, popUp ->
-            appState.navigateAndPopUp(route, popUp)
-        }, student = student)
+        AddActionScreen(
+            navigateAndPopUp = { route, popUp ->
+                appState.navigateAndPopUp(
+                    route,
+                    popUp
+                )
+            },
+            student = student
+        )
     }
 }
 
@@ -64,14 +74,22 @@ fun NavGraphBuilder.settingScreenGraph(appState: TrackMateAppState) {
     }
 }
 
-fun NavGraphBuilder.phoneGraph() {
+fun NavGraphBuilder.phoneGraph(onItemClick: (String) -> Unit) {
     composable(SEARCH_SCREEN_PHONE.route) {
-        val searchScreenNavController = rememberNavController()
-        SearchScreenNavGraphPhone(
-            navController = searchScreenNavController
-        )
+        SearchScreenPhone(onItemClick = onItemClick)
     }
     composable(HOME_SCREEN_PHONE.route) {
         HomeScreenPhone()
+    }
+
+    // Make navigate with argument capable
+    composable(route = "$ACTION_DETAIL_SCREEN_PHONE/{studentId}", arguments = listOf(
+        navArgument("studentId") {
+            type = NavType.StringType
+        }
+    )) {
+        DetailScreenPhone(
+            studentId = it.arguments?.getString("studentId") ?: ""
+        )
     }
 }

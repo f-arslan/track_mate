@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.track_mate.model.Action
 import com.example.track_mate.model.ActionStatus
 import com.example.track_mate.model.service.StorageService
-import com.example.track_mate.model.Student
 import com.example.track_mate.model.service.module.FirebaseNodes
 import com.example.track_mate.ui.screens.RequestState
 import com.example.track_mate.use_cases.calculateTotalTimeOutside
@@ -24,13 +23,16 @@ class DetailScreenViewModel @Inject constructor(
     private val _allActions = MutableStateFlow<RequestState<List<Action>>>(RequestState.Idle)
     val allActions: StateFlow<RequestState<List<Action>>> = _allActions
 
-    private val _student = MutableStateFlow(Student())
-    val student: StateFlow<Student> = _student
+    private val _studentId = MutableStateFlow("")
+    val studentId: StateFlow<String> = _studentId
+
+    private val _studentName = MutableStateFlow("")
+    val studentName: StateFlow<String> = _studentName
 
     private fun getAllActions() {
         try {
             viewModelScope.launch(Dispatchers.IO) {
-                storageService.getAllActionsByStudentId(student.value.id) {
+                storageService.getAllActionsByStudentId(studentId.value) {
                     _allActions.value = RequestState.Success(it)
                 }
             }
@@ -67,8 +69,8 @@ class DetailScreenViewModel @Inject constructor(
         }
     }
 
-    fun initStudent(nStudent: Student) {
-        _student.value = nStudent
+    fun initStudent(nStudentId: String) {
+        _studentId.value = nStudentId
         getAllActions()
     }
 }

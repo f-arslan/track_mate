@@ -29,8 +29,7 @@ import com.example.track_mate.util.Constants.SMALL_PADDING
 @Composable
 fun SearchScreenPhone(
     viewModel: SearchScreenViewModel = hiltViewModel(),
-    navController: NavController,
-    onItemClick: (Student) -> Unit
+    onItemClick: (String) -> Unit
 ) {
     val firstTenStudents by viewModel.firstTenStudents.collectAsState()
     val uiState by viewModel.uiState
@@ -45,13 +44,7 @@ fun SearchScreenPhone(
         if (firstTenStudents.isNotEmpty()) {
             QueryResultSection(
                 data = firstTenStudents,
-                onItemClick = {
-                    navController.navigate(ACTION_DETAIL_SCREEN_PHONE) {
-                        popUpTo(navController.graph.startDestinationId)
-                        launchSingleTop = true
-                    }
-                    onItemClick(it)
-                }
+                onItemClick = onItemClick
             )
         } else {
             EmptyScreen()
@@ -63,7 +56,7 @@ fun SearchScreenPhone(
 @Composable
 fun QueryResultSection(
     data: List<Student>,
-    onItemClick: (Student) -> Unit
+    onItemClick: (String) -> Unit
 ) {
     if (data.isEmpty()) {
         return
@@ -85,7 +78,7 @@ fun QueryResultSection(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable {
-                            onItemClick(it)
+                            onItemClick(it.id)
                         },
                     text = it.name,
                 )
