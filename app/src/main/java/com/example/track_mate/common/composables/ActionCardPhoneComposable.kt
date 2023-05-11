@@ -15,8 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import com.example.track_mate.model.Action
-import com.example.track_mate.model.ActionStatus
+import com.example.track_mate.core.model.Action
+import com.example.track_mate.core.model.ActionStatus
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.SMALL_MEDIUM_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING

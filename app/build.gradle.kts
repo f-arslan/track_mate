@@ -83,10 +83,14 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
     implementation (libs.androidx.hilt.navigation.compose)
+
     implementation(libs.viewModel)
     implementation(libs.windowSizeClass)
     implementation(libs.navigation)
+
     implementation(libs.opencsv)
+    implementation (libs.androidx.material.icons.extended)
+
 }
 kapt {
     correctErrorTypes = true

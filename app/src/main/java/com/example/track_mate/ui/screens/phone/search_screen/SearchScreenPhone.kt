@@ -19,7 +19,7 @@ import androidx.navigation.NavController
 import com.example.track_mate.ACTION_DETAIL_SCREEN_PHONE
 import com.example.track_mate.common.composables.AppSearchBar
 import com.example.track_mate.common.composables.EmptyScreen
-import com.example.track_mate.model.Student
+import com.example.track_mate.core.model.Student
 import com.example.track_mate.ui.screens.view_models.SearchScreenViewModel
 import com.example.track_mate.util.Constants.HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_PADDING

@@ -1,9 +1,9 @@
-package com.example.track_mate.model.service.module
+package com.example.track_mate.core.model.service.module
 
-import com.example.track_mate.model.Action
-import com.example.track_mate.model.Description
-import com.example.track_mate.model.Personal
-import com.example.track_mate.model.Student
+import com.example.track_mate.core.model.Action
+import com.example.track_mate.core.model.Description
+import com.example.track_mate.core.model.Personal
+import com.example.track_mate.core.model.Student
 
 sealed class FirebaseNodes<T>(val section: String, val classType: Class<T>) {
     object StudentNode :

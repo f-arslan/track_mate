@@ -1,7 +1,7 @@
-package com.example.track_mate.model.service
+package com.example.track_mate.core.model.service
 
-import com.example.track_mate.model.Action
-import com.example.track_mate.model.service.module.FirebaseNodes
+import com.example.track_mate.core.model.Action
+import com.example.track_mate.core.model.service.module.FirebaseNodes
 
 interface StorageService {
     fun <T> getAllData(node: FirebaseNodes<T>, onDataChangeListener: (List<T>) -> Unit)

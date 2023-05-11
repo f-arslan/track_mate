@@ -27,9 +27,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.track_mate.model.Action
-import com.example.track_mate.model.ActionStatus
-import com.example.track_mate.model.Student
+import com.example.track_mate.core.model.Action
+import com.example.track_mate.core.model.ActionStatus
+import com.example.track_mate.core.model.Student
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING
 import com.example.track_mate.R.drawable as AppIcon

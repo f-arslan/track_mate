@@ -1,4 +1,4 @@
-package com.example.track_mate.model.service.module
+package com.example.track_mate.core.model.service.module
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth

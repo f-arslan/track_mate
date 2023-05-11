@@ -28,6 +28,8 @@ class TrackMateAppState(
         }
     }
 
+
+
     fun popUp() {
         navController.popBackStack()
     }

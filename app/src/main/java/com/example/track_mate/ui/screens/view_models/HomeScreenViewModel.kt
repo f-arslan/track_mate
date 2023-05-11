@@ -3,10 +3,10 @@ package com.example.track_mate.ui.screens.view_models
 import android.content.Context
 import androidx.lifecycle.viewModelScope
 import com.example.track_mate.common.snackbar.SnackbarManager
-import com.example.track_mate.model.Action
-import com.example.track_mate.model.ActionStatus
-import com.example.track_mate.model.service.StorageService
-import com.example.track_mate.model.service.module.FirebaseNodes
+import com.example.track_mate.core.model.Action
+import com.example.track_mate.core.model.ActionStatus
+import com.example.track_mate.core.model.service.StorageService
+import com.example.track_mate.core.model.service.module.FirebaseNodes
 import com.example.track_mate.ui.screens.RequestState
 import com.example.track_mate.use_cases.calculateTotalTimeOutside
 import com.example.track_mate.use_cases.getCurrentDate

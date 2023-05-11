@@ -3,10 +3,10 @@ package com.example.track_mate.ui.screens.view_models
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import com.example.track_mate.common.snackbar.SnackbarManager
-import com.example.track_mate.model.Description
-import com.example.track_mate.model.Personal
-import com.example.track_mate.model.service.StorageService
-import com.example.track_mate.model.service.module.FirebaseNodes
+import com.example.track_mate.core.model.Description
+import com.example.track_mate.core.model.Personal
+import com.example.track_mate.core.model.service.StorageService
+import com.example.track_mate.core.model.service.module.FirebaseNodes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

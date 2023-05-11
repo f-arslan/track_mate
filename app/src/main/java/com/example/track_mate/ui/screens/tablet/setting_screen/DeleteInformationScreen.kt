@@ -34,9 +34,9 @@ import com.example.track_mate.common.composables.AppDialog
 import com.example.track_mate.common.composables.AppTopBar
 import com.example.track_mate.common.composables.DeleteSectionButton
 import com.example.track_mate.common.composables.DeleteUploadButton
-import com.example.track_mate.model.DeleteListItem
-import com.example.track_mate.model.Description
-import com.example.track_mate.model.Personal
+import com.example.track_mate.core.model.DeleteListItem
+import com.example.track_mate.core.model.Description
+import com.example.track_mate.core.model.Personal
 import com.example.track_mate.ui.screens.RequestState
 import com.example.track_mate.ui.screens.view_models.DeleteInformationViewModel
 import com.example.track_mate.ui.screens.view_models.ShowState

@@ -25,7 +25,7 @@ import com.example.track_mate.common.composables.AppSearchList
 import com.example.track_mate.common.composables.AppTopBar
 import com.example.track_mate.common.composables.EmptyScreen
 import com.example.track_mate.common.composables.FloatingActionButtonApp
-import com.example.track_mate.model.Student
+import com.example.track_mate.core.model.Student
 import com.example.track_mate.rememberAppState
 import com.example.track_mate.ui.screens.graph.searchScreenGraph
 import com.example.track_mate.ui.screens.view_models.SearchScreenViewModel

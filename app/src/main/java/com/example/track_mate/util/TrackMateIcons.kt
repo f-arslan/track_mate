@@ -2,15 +2,21 @@ package com.example.track_mate.util
 
 import androidx.annotation.DrawableRes
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.example.track_mate.R.drawable as AppIcon
 
 object TrackMateIcons {
-    val HomeOutline = AppIcon.outline_home_24
-    val HomeFilled = AppIcon.baseline_home_24
-    val SearchOutline = AppIcon.baseline_search_24
-    val SettingsOutline = AppIcon.outline_settings_24
-    val SettingsFilled = AppIcon.baseline_settings_24
+    val HomeOutline = Icons.Outlined.Home
+    val HomeFilled = Icons.Filled.Home
+    val Search = Icons.Filled.Search
+    val SettingsOutline = Icons.Outlined.Settings
+    val SettingsFilled = Icons.Filled.Settings
+    val BackArrow = Icons.Filled.ArrowBack
 }
 
 

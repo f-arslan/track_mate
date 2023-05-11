@@ -30,7 +30,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.track_mate.ACTION_DETAIL_SCREEN_TABLET
 import com.example.track_mate.ADD_ACTION_SCREEN_TABLET
 import com.example.track_mate.common.composables.AppDropDownMenu
-import com.example.track_mate.model.Student
+import com.example.track_mate.core.model.Student
 import com.example.track_mate.ui.screens.RequestState
 import com.example.track_mate.ui.screens.view_models.AddActionViewModel
 import com.example.track_mate.ui.screens.view_models.Sections

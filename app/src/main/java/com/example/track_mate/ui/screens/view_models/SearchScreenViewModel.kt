@@ -2,9 +2,9 @@ package com.example.track_mate.ui.screens.view_models
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.example.track_mate.model.service.StorageService
-import com.example.track_mate.model.Student
-import com.example.track_mate.model.service.module.FirebaseNodes
+import com.example.track_mate.core.model.service.StorageService
+import com.example.track_mate.core.model.Student
+import com.example.track_mate.core.model.service.module.FirebaseNodes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

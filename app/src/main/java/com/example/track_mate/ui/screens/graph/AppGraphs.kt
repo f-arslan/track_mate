@@ -16,7 +16,7 @@ import com.example.track_mate.SEARCH_SCREEN_PHONE
 import com.example.track_mate.SEARCH_SCREEN_TABLET
 import com.example.track_mate.SETTING_SCREEN_TABLET
 import com.example.track_mate.TrackMateAppState
-import com.example.track_mate.model.Student
+import com.example.track_mate.core.model.Student
 import com.example.track_mate.ui.screens.phone.home_screen.HomeScreenPhone
 import com.example.track_mate.ui.screens.phone.search_screen.DetailScreenPhone
 import com.example.track_mate.ui.screens.phone.search_screen.SearchScreenPhone

@@ -1,10 +1,10 @@
-package com.example.track_mate.model
+package com.example.track_mate.core.model
 
 import androidx.compose.runtime.Immutable
 import java.util.UUID
 
 @Immutable
-data class Personal(
+data class Description(
     override val id: String = UUID.randomUUID().toString(),
     override val name: String = ""
 ): DeleteListItem

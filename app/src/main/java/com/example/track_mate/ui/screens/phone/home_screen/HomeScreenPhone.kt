@@ -9,7 +9,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.track_mate.common.composables.DetailGridPhone
 import com.example.track_mate.common.composables.EmptyScreen
 import com.example.track_mate.common.composables.HeaderPhone
-import com.example.track_mate.model.Action
+import com.example.track_mate.core.model.Action
 import com.example.track_mate.ui.screens.RequestState
 import com.example.track_mate.ui.screens.view_models.HomeScreenViewModelApp
 import com.example.track_mate.util.Constants.HOME

@@ -1,6 +1,6 @@
-package com.example.track_mate.model.service.impl
+package com.example.track_mate.core.model.service.impl
 
-import com.example.track_mate.model.service.LogService
+import com.example.track_mate.core.model.service.LogService
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 import javax.inject.Inject

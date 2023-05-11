@@ -1,4 +1,4 @@
-package com.example.track_mate.model
+package com.example.track_mate.core.model
 
 import com.google.firebase.perf.ktx.trace
 import com.google.firebase.perf.metrics.Trace

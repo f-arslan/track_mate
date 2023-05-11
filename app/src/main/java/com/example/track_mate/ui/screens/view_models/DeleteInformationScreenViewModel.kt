@@ -5,12 +5,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import com.example.track_mate.common.snackbar.SnackbarManager
-import com.example.track_mate.model.Description
-import com.example.track_mate.model.Personal
-import com.example.track_mate.model.service.StorageService
-import com.example.track_mate.model.service.module.FirebaseNodes
+import com.example.track_mate.core.model.Description
+import com.example.track_mate.core.model.Personal
+import com.example.track_mate.core.model.service.StorageService
+import com.example.track_mate.core.model.service.module.FirebaseNodes
 import com.example.track_mate.ui.screens.RequestState
-import com.example.track_mate.model.DeleteListItem
+import com.example.track_mate.core.model.DeleteListItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

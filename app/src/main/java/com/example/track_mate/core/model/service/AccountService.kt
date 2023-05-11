@@ -1,6 +1,6 @@
-package com.example.track_mate.model.service
+package com.example.track_mate.core.model.service
 
-import com.example.track_mate.model.User
+import com.example.track_mate.core.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface AccountService {

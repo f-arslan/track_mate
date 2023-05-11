@@ -6,8 +6,8 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.track_mate.common.composables.ActionGrid
 import com.example.track_mate.common.composables.EmptyScreen
-import com.example.track_mate.model.Action
-import com.example.track_mate.model.Student
+import com.example.track_mate.core.model.Action
+import com.example.track_mate.core.model.Student
 import com.example.track_mate.ui.screens.RequestState
 import com.example.track_mate.ui.screens.view_models.DetailScreenViewModel
 
