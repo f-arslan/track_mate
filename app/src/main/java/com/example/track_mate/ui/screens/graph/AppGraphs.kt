@@ -82,7 +82,6 @@ fun NavGraphBuilder.phoneGraph(onItemClick: (String) -> Unit) {
         HomeScreenPhone()
     }
 
-    // Make navigate with argument capable
     composable(route = "$ACTION_DETAIL_SCREEN_PHONE/{studentId}", arguments = listOf(
         navArgument("studentId") {
             type = NavType.StringType

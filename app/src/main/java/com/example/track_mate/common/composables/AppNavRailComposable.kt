@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Text
@@ -65,7 +64,7 @@ fun AppNavRail(clearAndNavigate: (String) -> Unit) {
             AppNavRailItem(
                 selected = selectedRouteIndex == 2,
                 icon = setIconType(selectedRouteIndex == 2, SETTING_SCREEN_TABLET),
-                label = AppText.setting,
+                label = AppText.settings,
                 onClick = { navigateToScreen(SETTING_SCREEN_TABLET.route, 2) },
             )
         }

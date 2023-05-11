@@ -15,7 +15,7 @@ fun CardWrapper(content: @Composable () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxSize()
-            .padding(VERY_HIGH_PADDING),
+            .padding(MEDIUM_PADDING),
         shape = RoundedCornerShape(MEDIUM_PADDING)
     ) {
         content()

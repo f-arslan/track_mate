@@ -52,7 +52,7 @@ fun SettingPresentationScreen(navigate: (String) -> Unit) {
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {
-        AppTopBar(text = stringResource(AppText.setting))
+        AppTopBar(text = stringResource(AppText.settings))
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
