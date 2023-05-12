@@ -23,7 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.track_mate.common.composables.AppTextField
-import com.example.track_mate.common.composables.AppTopBar
+import com.example.track_mate.common.composables.TrackMateTopAppBar
 import com.example.track_mate.ui.screens.view_models.AddInformationViewModel
 import com.example.track_mate.ui.screens.view_models.ButtonState
 import com.example.track_mate.util.Constants.DESCRIPTION
@@ -47,7 +47,13 @@ fun AddInformationScreen(
                 .fillMaxSize()
                 .padding(it),
         ) {
-            AppTopBar(text = stringResource(AppText.add_information_screen))
+            TrackMateTopAppBar(
+                title = stringResource(AppText.add_information_screen),
+                navigationIcon = null,
+                navigationIconContentDescription = null,
+                actionIcon = null,
+                actionIconContentDescription = null
+            )
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,

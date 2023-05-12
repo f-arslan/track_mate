@@ -2,12 +2,11 @@ package com.example.track_mate.ui.screens.tablet.search_screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
@@ -22,9 +21,10 @@ import com.example.track_mate.ACTION_DETAIL_SCREEN_TABLET
 import com.example.track_mate.ADD_ACTION_SCREEN_TABLET
 import com.example.track_mate.common.composables.AppSearchBar
 import com.example.track_mate.common.composables.AppSearchList
-import com.example.track_mate.common.composables.AppTopBar
 import com.example.track_mate.common.composables.EmptyScreen
 import com.example.track_mate.common.composables.FloatingActionButtonApp
+import com.example.track_mate.common.composables.SurfaceWrapper
+import com.example.track_mate.common.composables.TrackMateTopAppBar
 import com.example.track_mate.core.model.Student
 import com.example.track_mate.rememberAppState
 import com.example.track_mate.ui.screens.graph.searchScreenGraph
@@ -34,6 +34,8 @@ import com.example.track_mate.util.Constants.HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.NO_PADDING
+import com.example.track_mate.util.Constants.SMALL_PADDING
+import com.example.track_mate.util.Constants.VERY_SMALL_PADDING
 
 @Composable
 fun SearchScreenTablet(viewModel: SearchScreenViewModel = hiltViewModel()) {
@@ -62,14 +64,7 @@ fun SearchScreenTablet(viewModel: SearchScreenViewModel = hiltViewModel()) {
                 .height(NO_PADDING)
         )
 
-        Card(
-            modifier = Modifier
-                .weight(0.7f)
-                .fillMaxSize(),
-            shape = RoundedCornerShape(
-                MEDIUM_PADDING
-            )
-        ) {
+        SurfaceWrapper(modifier = Modifier.weight(0.7f), tonalElevation = VERY_SMALL_PADDING) {
             if (uiState.selectedStudent.name == "") {
                 EmptyScreen()
             } else {
@@ -87,8 +82,12 @@ fun DetailSectionTablet(
     val appState = rememberAppState()
     Scaffold(
         topBar = {
-            AppTopBar(
-                text = student.name
+            TrackMateTopAppBar(
+                title = student.name,
+                navigationIcon = null,
+                navigationIconContentDescription = null,
+                actionIcon = null,
+                actionIconContentDescription = null
             )
         },
         floatingActionButton = {
@@ -103,7 +102,10 @@ fun DetailSectionTablet(
             navController = appState.navController,
             startDestination = ACTION_DETAIL_SCREEN_TABLET
         ) {
-            searchScreenGraph(appState, student)
+            searchScreenGraph(
+                appState,
+                student
+            )
         }
     }
 }
@@ -117,10 +119,7 @@ fun SearchSection(
     onStudentClick: (Student) -> Unit,
     onCancel: () -> Unit,
 ) {
-    Card(
-        modifier = modifier,
-        shape = RoundedCornerShape(MEDIUM_PADDING),
-    ) {
+    SurfaceWrapper(modifier = modifier, tonalElevation = VERY_SMALL_PADDING) {
         Column(modifier = Modifier.padding(MEDIUM_HIGH_PADDING)) {
             AppSearchBar(
                 value = uiState.textState,
@@ -129,6 +128,7 @@ fun SearchSection(
                 onCancel = onCancel
             )
             if (firstTenStudents.isNotEmpty()) {
+                Spacer(modifier = Modifier.padding(MEDIUM_PADDING))
                 AppSearchList(
                     firstTenStudents = firstTenStudents,
                     onStudentClick = onStudentClick

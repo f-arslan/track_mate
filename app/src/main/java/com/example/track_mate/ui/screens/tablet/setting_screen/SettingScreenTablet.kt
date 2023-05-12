@@ -20,12 +20,15 @@ import com.example.track_mate.ADD_INFORMATION_SCREEN_TABLET
 import com.example.track_mate.DELETE_INFORMATION_SCREEN_TABLET
 import com.example.track_mate.PRESENTATION_SCREEN_TABLET
 import com.example.track_mate.common.composables.AppExtendedButton
-import com.example.track_mate.common.composables.AppTopBar
 import com.example.track_mate.common.composables.CardWrapper
+import com.example.track_mate.common.composables.SurfaceWrapper
+import com.example.track_mate.common.composables.TrackMateTopAppBar
 import com.example.track_mate.rememberAppState
 import com.example.track_mate.ui.screens.graph.settingScreenGraph
+import com.example.track_mate.util.Constants.HIGH_PADDING
 import com.example.track_mate.util.Constants.NO_PADDING
 import com.example.track_mate.util.Constants.VERY_HIGH_PADDING
+import com.example.track_mate.util.Constants.VERY_SMALL_PADDING
 import com.example.track_mate.R.string as AppText
 import com.example.track_mate.R.drawable as AppIcon
 
@@ -33,7 +36,7 @@ import com.example.track_mate.R.drawable as AppIcon
 @Composable
 fun SettingScreenTablet() {
     val appState = rememberAppState()
-    CardWrapper {
+    SurfaceWrapper(modifier = Modifier.padding(HIGH_PADDING), tonalElevation = VERY_SMALL_PADDING) {
         Scaffold {
             NavHost(
                 navController = appState.navController,
@@ -46,13 +49,20 @@ fun SettingScreenTablet() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingPresentationScreen(navigate: (String) -> Unit) {
     val buttonWidth = (LocalConfiguration.current.screenWidthDp / 4).dp
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {
-        AppTopBar(text = stringResource(AppText.settings))
+        TrackMateTopAppBar(
+            title = stringResource(AppText.settings),
+            navigationIcon = null,
+            navigationIconContentDescription = null,
+            actionIcon = null,
+            actionIconContentDescription = null
+        )
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,

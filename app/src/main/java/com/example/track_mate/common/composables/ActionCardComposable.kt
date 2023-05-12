@@ -20,9 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Blue
-import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -33,6 +30,7 @@ import com.example.track_mate.core.model.Student
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING
 import com.example.track_mate.R.drawable as AppIcon
+
 @Composable
 fun ActionCard(action: Action, onApproveClick: () -> Unit, onDeleteClick: () -> Unit) {
     var isButtonVisible by remember { mutableStateOf(false) }
@@ -41,22 +39,48 @@ fun ActionCard(action: Action, onApproveClick: () -> Unit, onDeleteClick: () -> 
         isButtonVisible = !isButtonVisible
     }) {
         Column {
-            ActionStatusRow(action.student.name, action.status)
-            Column(modifier = Modifier.padding(MEDIUM_PADDING)) {
-                Column(verticalArrangement = Arrangement.spacedBy(SMALL_PADDING)) {
-                    InfoRowSection(AppIcon.baseline_supervisor_account_24, action.personal)
-                    InfoRowSection(AppIcon.outline_timelapse_24, action.getStartDateTime())
-                    InfoRowSection(AppIcon.baseline_access_time_filled_24, action.getEndDateTime())
-                    InfoRowSection(AppIcon.outline_timer_24, action.givenTime)
-                    InfoRowSection(AppIcon.outline_timelapse_24, action.getTotalTime())
-                    InfoRowSection(AppIcon.outline_description_24, action.description)
-                    AnimatedVisibility(visible = isButtonVisible) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.End
-                        ) {
-                            ActionButtons(action.status, onApproveClick, onDeleteClick)
-                        }
+            ActionStatusRow(
+                action.student.name,
+                action.status
+            )
+            Column(
+                modifier = Modifier.padding(MEDIUM_PADDING),
+                verticalArrangement = Arrangement.spacedBy(SMALL_PADDING)
+            ) {
+                InfoRowSection(
+                    AppIcon.baseline_supervisor_account_24,
+                    action.personal
+                )
+                InfoRowSection(
+                    AppIcon.outline_timelapse_24,
+                    action.getStartDateTime()
+                )
+                InfoRowSection(
+                    AppIcon.baseline_access_time_filled_24,
+                    action.getEndDateTime()
+                )
+                InfoRowSection(
+                    AppIcon.outline_timer_24,
+                    action.givenTime
+                )
+                InfoRowSection(
+                    AppIcon.outline_timelapse_24,
+                    action.getTotalTime()
+                )
+                InfoRowSection(
+                    AppIcon.outline_description_24,
+                    action.description
+                )
+                AnimatedVisibility(visible = isButtonVisible) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        ActionButtons(
+                            action.status,
+                            onApproveClick,
+                            onDeleteClick
+                        )
                     }
                 }
             }
@@ -68,7 +92,7 @@ fun ActionCard(action: Action, onApproveClick: () -> Unit, onDeleteClick: () -> 
 fun ActionStatusRow(
     name: String, status: ActionStatus
 ) {
-    val color = when(status) {
+    val color = when (status) {
         ActionStatus.ON_GOING -> MaterialTheme.colorScheme.primaryContainer
         ActionStatus.COMPLETE -> MaterialTheme.colorScheme.tertiaryContainer
     }
@@ -83,7 +107,8 @@ fun ActionStatusRow(
         Text(
             text = name,
             maxLines = 1,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
+            fontWeight = FontWeight.SemiBold
         )
     }
 }
@@ -94,8 +119,13 @@ fun InfoRowSection(@DrawableRes icon: Int, text: String) {
         horizontalArrangement = Arrangement.spacedBy(MEDIUM_PADDING),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(painter = painterResource(icon), contentDescription = null)
-        Text(text = text, fontWeight = FontWeight.SemiBold)
+        Icon(
+            painter = painterResource(icon),
+            contentDescription = null
+        )
+        Text(
+            text = text,
+        )
     }
 }
 
@@ -117,6 +147,8 @@ fun PreviewActionCard() {
             givenTime = "30 minutes",
             totalTimeOutside = "24",
             description = "Hospital"
-        ), {}, {})
+        ),
+            {},
+            {})
     }
 }

@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -31,9 +32,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.track_mate.common.composables.AppDialog
-import com.example.track_mate.common.composables.AppTopBar
 import com.example.track_mate.common.composables.DeleteSectionButton
 import com.example.track_mate.common.composables.DeleteUploadButton
+import com.example.track_mate.common.composables.TrackMateTopAppBar
 import com.example.track_mate.core.model.DeleteListItem
 import com.example.track_mate.core.model.Description
 import com.example.track_mate.core.model.Personal
@@ -47,6 +48,7 @@ import com.example.track_mate.util.Constants.SMALL_PADDING
 import com.example.track_mate.util.Constants.VERY_HIGH_PADDING
 import com.example.track_mate.R.string as AppText
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DeleteInformationScreen(
     deleteInformationViewModel: DeleteInformationViewModel = hiltViewModel()
@@ -69,7 +71,13 @@ fun DeleteInformationScreen(
     if (personals is RequestState.Success && descriptions is RequestState.Success) Column(
         modifier = Modifier.fillMaxSize(),
     ) {
-        AppTopBar(text = stringResource(AppText.delete_information_screen))
+        TrackMateTopAppBar(
+            title = stringResource(AppText.delete_information_screen),
+            navigationIcon = null,
+            navigationIconContentDescription = null,
+            actionIcon = null,
+            actionIconContentDescription = null
+        )
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,

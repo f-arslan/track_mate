@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.SaveAlt
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -17,6 +18,7 @@ object TrackMateIcons {
     val SettingsOutline = Icons.Outlined.Settings
     val SettingsFilled = Icons.Filled.Settings
     val BackArrow = Icons.Filled.ArrowBack
+    val SaveAlt = Icons.Outlined.SaveAlt
 }
 
 
