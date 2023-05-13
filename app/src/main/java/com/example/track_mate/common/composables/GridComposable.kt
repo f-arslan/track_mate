@@ -18,6 +18,7 @@ import com.example.track_mate.core.model.Action
 import com.example.track_mate.util.Constants.BOTTOM_NAV_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
+import com.example.track_mate.util.Constants.SMALL_MEDIUM_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING
 
 @Composable
@@ -33,7 +34,7 @@ fun ActionGrid(
             .fillMaxSize()
             .padding(MEDIUM_HIGH_PADDING),
         userScrollEnabled = isScrollable,
-        columns = GridCells.Adaptive(200.dp),
+        columns = GridCells.Adaptive(175.dp),
         horizontalArrangement = Arrangement.spacedBy(MEDIUM_PADDING),
         verticalArrangement = Arrangement.spacedBy(MEDIUM_PADDING),
         contentPadding = PaddingValues(SMALL_PADDING)
@@ -57,13 +58,8 @@ fun DetailGridPhone(
         return
     }
     LazyVerticalGrid(
-        columns = GridCells.Fixed(1),
-        contentPadding = PaddingValues(
-            start = MEDIUM_PADDING,
-            end = MEDIUM_PADDING,
-            top = MEDIUM_PADDING,
-            bottom = BOTTOM_NAV_PADDING
-        )
+        columns = GridCells.Adaptive(175.dp),
+        contentPadding = PaddingValues(SMALL_PADDING)
     ) {
         items(items = items, key = { it.id }) {
             ActionCardPhone(action = it)

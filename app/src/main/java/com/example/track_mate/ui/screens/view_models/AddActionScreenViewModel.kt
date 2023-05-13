@@ -89,10 +89,12 @@ class AddActionViewModel @Inject constructor(
     }
 
     private fun addActionToDatabase() {
-        storageService.addProperty(
-            dataId = currentAction.id,
-            data = currentAction,
-            node = FirebaseNodes.ActionNode
-        )
+        viewModelScope.launch(Dispatchers.IO) {
+            storageService.addProperty(
+                dataId = currentAction.id,
+                data = currentAction,
+                node = FirebaseNodes.ActionNode
+            )
+        }
     }
 }

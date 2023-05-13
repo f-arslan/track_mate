@@ -42,19 +42,17 @@ fun NavGraphBuilder.tabletGraph() {
     }
 }
 
-fun NavGraphBuilder.searchScreenGraph(appState: TrackMateAppState, student: Student) {
+fun NavGraphBuilder.searchScreenGraph(
+    appState: TrackMateAppState,
+    student: Student
+) {
     composable(ACTION_DETAIL_SCREEN_TABLET) {
         DetailScreen(student = student)
     }
 
     composable(ADD_ACTION_SCREEN_TABLET) {
         AddActionScreen(
-            navigateAndPopUp = { route, popUp ->
-                appState.navigateAndPopUp(
-                    route,
-                    popUp
-                )
-            },
+            popUp = { appState.popUp() },
             student = student
         )
     }
@@ -67,27 +65,35 @@ fun NavGraphBuilder.settingScreenGraph(appState: TrackMateAppState) {
         )
     }
     composable(ADD_INFORMATION_SCREEN_TABLET) {
-        AddInformationScreen()
+        AddInformationScreen(popUp = { appState.popUp() })
     }
     composable(DELETE_INFORMATION_SCREEN_TABLET) {
-        DeleteInformationScreen()
+        DeleteInformationScreen(popUp = { appState.popUp() })
     }
 }
 
-fun NavGraphBuilder.phoneGraph(onItemClick: (String) -> Unit) {
+fun NavGraphBuilder.phoneGraph(appState: TrackMateAppState) {
     composable(SEARCH_SCREEN_PHONE.route) {
-        SearchScreenPhone(onItemClick = onItemClick)
+        SearchScreenPhone(onItemClick = { studentId ->
+            appState.navigateWithArgument(
+                route = ACTION_DETAIL_SCREEN_PHONE,
+                argument = studentId
+            )
+        })
+
     }
     composable(HOME_SCREEN_PHONE.route) {
         HomeScreenPhone()
     }
 
-    composable(route = "$ACTION_DETAIL_SCREEN_PHONE/{studentId}", arguments = listOf(
-        navArgument("studentId") {
+    composable(
+        route = "$ACTION_DETAIL_SCREEN_PHONE/{studentId}",
+        arguments = listOf(navArgument("studentId") {
             type = NavType.StringType
-        }
-    )) {
+        })
+    ) {
         DetailScreenPhone(
+            popUp = { appState.popUp() },
             studentId = it.arguments?.getString("studentId") ?: ""
         )
     }

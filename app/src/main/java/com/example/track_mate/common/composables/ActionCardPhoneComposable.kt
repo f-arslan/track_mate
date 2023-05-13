@@ -6,14 +6,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import com.example.track_mate.core.model.Action
 import com.example.track_mate.core.model.ActionStatus
@@ -21,6 +22,7 @@ import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.SMALL_MEDIUM_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING
 import com.example.track_mate.util.Constants.STILL_OUTSIDE
+import com.example.track_mate.util.TrackMateIcons
 import com.example.track_mate.R.drawable as AppIcon
 
 
@@ -28,13 +30,12 @@ import com.example.track_mate.R.drawable as AppIcon
 fun ActionCardPhone(
     action: Action
 ) {
-    Card(
-        shape = RoundedCornerShape(SMALL_PADDING),
+    ActionSurfaceWrapper(
         modifier = Modifier.padding(SMALL_MEDIUM_PADDING)
     ) {
         Column {
-            ActionCardHeader(
-                studentName = action.student.name,
+            ActionStatusRow(
+                name = action.student.name,
                 status = action.status
             )
             ActionCardSections(
@@ -60,26 +61,55 @@ fun ActionCardSections(
             .padding(SMALL_PADDING)
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(SMALL_MEDIUM_PADDING)) {
-            ActionCardItem(icon = AppIcon.baseline_person_4_24, text = personalName)
-            ActionCardItem(icon = AppIcon.outline_description_24, text = description)
-            ActionCardItem(icon = AppIcon.baseline_access_time_24, text = startTime)
-            ActionCardItem(icon = AppIcon.baseline_access_time_filled_24, text = endTime)
+            ActionCardItem(
+                icon = null,
+                text = personalName,
+                imageVector = TrackMateIcons.Person
+            )
+            ActionCardItem(
+                icon = AppIcon.outline_description_24,
+                text = description,
+                imageVector = null
+            )
+            ActionCardItem(
+                icon = AppIcon.baseline_access_time_24,
+                text = startTime,
+                imageVector = null
+            )
+            ActionCardItem(
+                icon = AppIcon.baseline_access_time_filled_24,
+                text = endTime,
+                imageVector = null
+            )
         }
     }
 }
 
 @Composable
-fun ActionCardItem(@DrawableRes icon: Int, text: String) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(MEDIUM_PADDING)
-    ) {
-        Icon(painter = painterResource(icon), contentDescription = null)
-        Text(
-            text = text,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
-        )
+fun ActionCardItem(
+    @DrawableRes icon: Int?,
+    text: String,
+    imageVector: ImageVector?
+) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(SMALL_MEDIUM_PADDING)
+        ) {
+            if (imageVector != null) Icon(
+                imageVector = imageVector,
+                contentDescription = null
+            )
+            if (icon != null) Icon(
+                painterResource(icon),
+                contentDescription = null
+            )
+            Text(
+                text = text,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                fontWeight = FontWeight.SemiBold,
+                style = MaterialTheme.typography.bodyMedium
+            )
     }
 }
 

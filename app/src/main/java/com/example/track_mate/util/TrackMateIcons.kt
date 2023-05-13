@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Home
@@ -19,6 +20,7 @@ object TrackMateIcons {
     val SettingsFilled = Icons.Filled.Settings
     val BackArrow = Icons.Filled.ArrowBack
     val SaveAlt = Icons.Outlined.SaveAlt
+    val Person = Icons.Filled.Person
 }
 
 

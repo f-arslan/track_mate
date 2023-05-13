@@ -15,23 +15,18 @@ import com.example.track_mate.ui.screens.graph.phoneGraph
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PhoneApp() {
-    val appStatePhone = rememberAppState()
+    val appState = rememberAppState()
     Scaffold(bottomBar = {
         BottomBarPhone(
-            navController = appStatePhone.navController
+            navController = appState.navController
         )
     }) {
         NavHost(
             modifier = Modifier.padding(it),
-            navController = appStatePhone.navController,
+            navController = appState.navController,
             startDestination = HOME_SCREEN_PHONE.route
         ) {
-            phoneGraph(onItemClick = { studentId ->
-                appStatePhone.navigateWithArgument(
-                    route = ACTION_DETAIL_SCREEN_PHONE,
-                    argument = studentId
-                )
-            })
+            phoneGraph(appState)
         }
     }
 }

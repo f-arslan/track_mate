@@ -45,7 +45,7 @@ import com.example.track_mate.R.string as AppText
 
 @Composable
 fun AddActionScreen(
-    navigateAndPopUp: (String, String) -> Unit,
+    popUp: () -> Unit,
     student: Student,
     viewModel: AddActionViewModel = hiltViewModel(),
 ) {
@@ -53,7 +53,10 @@ fun AddActionScreen(
     val descriptions by viewModel.descriptions.collectAsState()
 
     LaunchedEffect(key1 = true) {
-        viewModel.updateAction(Sections.STUDENT, newStudent = student)
+        viewModel.updateAction(
+            Sections.STUDENT,
+            newStudent = student
+        )
     }
 
     Column(
@@ -77,26 +80,43 @@ fun AddActionScreen(
             if (it is RequestState.Success) {
                 AppDropDownMenu(data = it.data.map { data -> data.name },
                     label = AppText.personals,
-                    onSelectedItem = { name -> viewModel.updateAction(Sections.PERSONAL, name) })
+                    onSelectedItem = { name ->
+                        viewModel.updateAction(
+                            Sections.PERSONAL,
+                            name
+                        )
+                    })
             }
         }
         descriptions.let {
             if (it is RequestState.Success) {
                 AppDropDownMenu(data = it.data.map { data -> data.name },
                     label = AppText.descriptions,
-                    onSelectedItem = { name -> viewModel.updateAction(Sections.DESCRIPTION, name) })
+                    onSelectedItem = { name ->
+                        viewModel.updateAction(
+                            Sections.DESCRIPTION,
+                            name
+                        )
+                    })
             }
         }
         AppDropDownMenu(data = viewModel.givenTimes.map { data -> data.name },
             label = AppText.given_times,
-            onSelectedItem = { name -> viewModel.updateAction(Sections.GIVEN_TIME, name) })
+            onSelectedItem = { name ->
+                viewModel.updateAction(
+                    Sections.GIVEN_TIME,
+                    name
+                )
+            })
 
-        ButtonSection(onConfirmButtonClick = {
-            viewModel.onConfirmClick()
-            navigateAndPopUp(ACTION_DETAIL_SCREEN_TABLET, ADD_ACTION_SCREEN_TABLET)
-        }, onCancelButtonClick = {
-            navigateAndPopUp(ACTION_DETAIL_SCREEN_TABLET, ADD_ACTION_SCREEN_TABLET)
-        })
+        ButtonSection(
+            onConfirmButtonClick = {
+                viewModel.onConfirmClick()
+                popUp()
+            },
+            onCancelButtonClick = {
+                popUp()
+            })
     }
 }
 
@@ -106,7 +126,8 @@ private val buttonWidth = 90.dp
 
 @Composable
 fun ButtonSection(
-    onConfirmButtonClick: () -> Unit = {}, onCancelButtonClick: () -> Unit = {}
+    onConfirmButtonClick: () -> Unit = {},
+    onCancelButtonClick: () -> Unit = {}
 ) {
     Row(modifier = Modifier.padding(top = MEDIUM_PADDING)) {
         Button(
@@ -116,7 +137,8 @@ fun ButtonSection(
             onClick = onConfirmButtonClick
         ) {
             Icon(
-                imageVector = Icons.Default.Done, contentDescription = stringResource(AppText.done)
+                imageVector = Icons.Default.Done,
+                contentDescription = stringResource(AppText.done)
             )
         }
         Divider(

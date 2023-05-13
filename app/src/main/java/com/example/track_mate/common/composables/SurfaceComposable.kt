@@ -1,20 +1,13 @@
 package com.example.track_mate.common.composables
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
-import com.example.track_mate.util.Constants
-import com.example.track_mate.util.Constants.MEDIUM_HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.NO_PADDING
-import com.example.track_mate.util.Constants.SMALL_MEDIUM_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING
-import com.example.track_mate.util.Constants.VERY_SMALL_PADDING
 
 @Composable
 fun ActionSurfaceWrapper(modifier: Modifier = Modifier, content: @Composable () -> Unit) {

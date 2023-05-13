@@ -28,6 +28,7 @@ import com.example.track_mate.core.model.Action
 import com.example.track_mate.core.model.ActionStatus
 import com.example.track_mate.core.model.Student
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
+import com.example.track_mate.util.Constants.SMALL_MEDIUM_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING
 import com.example.track_mate.R.drawable as AppIcon
 
@@ -100,7 +101,7 @@ fun ActionStatusRow(
         modifier = Modifier
             .fillMaxWidth()
             .background(color)
-            .padding(SMALL_PADDING),
+            .padding(SMALL_MEDIUM_PADDING),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
@@ -108,7 +109,8 @@ fun ActionStatusRow(
             text = name,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleMedium
         )
     }
 }
@@ -116,7 +118,7 @@ fun ActionStatusRow(
 @Composable
 fun InfoRowSection(@DrawableRes icon: Int, text: String) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(MEDIUM_PADDING),
+        horizontalArrangement = Arrangement.spacedBy(SMALL_MEDIUM_PADDING),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -125,6 +127,10 @@ fun InfoRowSection(@DrawableRes icon: Int, text: String) {
         )
         Text(
             text = text,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            fontWeight = FontWeight.SemiBold,
+            style = MaterialTheme.typography.bodyMedium
         )
     }
 }

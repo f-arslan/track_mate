@@ -29,11 +29,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.track_mate.common.composables.AppDialog
 import com.example.track_mate.common.composables.DeleteSectionButton
+import com.example.track_mate.common.composables.DeleteSectionLabel
 import com.example.track_mate.common.composables.DeleteUploadButton
+import com.example.track_mate.common.composables.SurfaceWrapper
 import com.example.track_mate.common.composables.TrackMateTopAppBar
 import com.example.track_mate.core.model.DeleteListItem
 import com.example.track_mate.core.model.Description
@@ -46,12 +49,14 @@ import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.NO_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING
 import com.example.track_mate.util.Constants.VERY_HIGH_PADDING
+import com.example.track_mate.util.TrackMateIcons
 import com.example.track_mate.R.string as AppText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DeleteInformationScreen(
-    deleteInformationViewModel: DeleteInformationViewModel = hiltViewModel()
+    deleteInformationViewModel: DeleteInformationViewModel = hiltViewModel(),
+    popUp: () -> Unit
 ) {
     val personals by deleteInformationViewModel.personals.collectAsState()
     val descriptions by deleteInformationViewModel.descriptions.collectAsState()
@@ -73,10 +78,11 @@ fun DeleteInformationScreen(
     ) {
         TrackMateTopAppBar(
             title = stringResource(AppText.delete_information_screen),
-            navigationIcon = null,
+            navigationIcon = TrackMateIcons.BackArrow,
             navigationIconContentDescription = null,
             actionIcon = null,
-            actionIconContentDescription = null
+            actionIconContentDescription = null,
+            onNavigationClick = popUp
         )
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -124,7 +130,8 @@ fun DeleteInformationScreen(
 
 @Composable
 fun DeleteBox(
-    data: List<DeleteListItem>, onItemClick: (DeleteListItem) -> Unit
+    data: List<DeleteListItem>,
+    onItemClick: (DeleteListItem) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -135,14 +142,13 @@ fun DeleteBox(
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 150.dp),
         ) {
-            items(
-                items = data,
+            items(items = data,
                 key = { it.id }) { item: DeleteListItem ->
-                Card(modifier = Modifier
+                SurfaceWrapper(modifier = Modifier
                     .padding(SMALL_PADDING)
                     .clickable {
                         onItemClick(item)
-                    }) {
+                    }, tonalElevation = SMALL_PADDING) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
@@ -160,16 +166,14 @@ fun DeleteBox(
 
 @Composable
 fun ResultSection(
-    data: List<DeleteListItem>, onItemClick: (DeleteListItem) -> Unit = {}
+    data: List<DeleteListItem>,
+    onItemClick: (DeleteListItem) -> Unit = {}
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(HIGH_PADDING),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        DeleteSectionButton(
-            text = AppText.results,
-            enabled = false,
-        )
+        DeleteSectionLabel(text = AppText.results)
         Card(
             modifier = Modifier
                 .height(250.dp)
@@ -179,8 +183,7 @@ fun ResultSection(
             LazyColumn(
                 contentPadding = PaddingValues(MEDIUM_PADDING)
             ) {
-                items(
-                    items = data,
+                items(items = data,
                     key = {
                         it.id
                     }) { item ->
@@ -189,6 +192,7 @@ fun ResultSection(
                             .fillMaxWidth()
                             .clickable { onItemClick(item) },
                         text = item.name,
+                        fontWeight = FontWeight.SemiBold
                     )
                 }
             }
@@ -198,24 +202,15 @@ fun ResultSection(
 
 @Composable
 fun SectionsButtons(
-    onPersonalClick: () -> Unit = {}, onDescriptionClick: () -> Unit = {}
+    onPersonalClick: () -> Unit = {},
+    onDescriptionClick: () -> Unit = {}
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(HIGH_PADDING),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        DeleteSectionButton(
-            text = AppText.sections,
-            enabled = false,
-        )
-        DeleteSectionButton(
-            text = AppText.personals,
-            onClick = onPersonalClick
-        )
-        DeleteSectionButton(
-            text = AppText.descriptions,
-            onClick = onDescriptionClick
-        )
+        DeleteSectionLabel(text = AppText.sections)
+        DeleteSectionButton(AppText.personals, onClick = onPersonalClick)
+        DeleteSectionButton(AppText.descriptions, onClick = onDescriptionClick)
     }
 }
-

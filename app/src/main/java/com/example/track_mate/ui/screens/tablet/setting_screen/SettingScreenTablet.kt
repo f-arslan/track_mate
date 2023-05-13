@@ -20,7 +20,6 @@ import com.example.track_mate.ADD_INFORMATION_SCREEN_TABLET
 import com.example.track_mate.DELETE_INFORMATION_SCREEN_TABLET
 import com.example.track_mate.PRESENTATION_SCREEN_TABLET
 import com.example.track_mate.common.composables.AppExtendedButton
-import com.example.track_mate.common.composables.CardWrapper
 import com.example.track_mate.common.composables.SurfaceWrapper
 import com.example.track_mate.common.composables.TrackMateTopAppBar
 import com.example.track_mate.rememberAppState
@@ -29,8 +28,8 @@ import com.example.track_mate.util.Constants.HIGH_PADDING
 import com.example.track_mate.util.Constants.NO_PADDING
 import com.example.track_mate.util.Constants.VERY_HIGH_PADDING
 import com.example.track_mate.util.Constants.VERY_SMALL_PADDING
-import com.example.track_mate.R.string as AppText
 import com.example.track_mate.R.drawable as AppIcon
+import com.example.track_mate.R.string as AppText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

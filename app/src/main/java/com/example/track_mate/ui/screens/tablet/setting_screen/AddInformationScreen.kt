@@ -32,13 +32,15 @@ import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.NO_PADDING
 import com.example.track_mate.util.Constants.PERSONAL
 import com.example.track_mate.util.Constants.SMALL_PADDING
+import com.example.track_mate.util.TrackMateIcons
 import com.example.track_mate.R.string as AppText
 import com.example.track_mate.R.drawable as AppIcon
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddInformationScreen(
-    addInformationViewModel: AddInformationViewModel = hiltViewModel()
+    addInformationViewModel: AddInformationViewModel = hiltViewModel(),
+    popUp: () -> Unit
 ) {
     val uiState by addInformationViewModel.uiState
     Scaffold {
@@ -49,10 +51,11 @@ fun AddInformationScreen(
         ) {
             TrackMateTopAppBar(
                 title = stringResource(AppText.add_information_screen),
-                navigationIcon = null,
+                navigationIcon = TrackMateIcons.BackArrow,
                 navigationIconContentDescription = null,
                 actionIcon = null,
-                actionIconContentDescription = null
+                actionIconContentDescription = null,
+                onNavigationClick = popUp
             )
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -126,7 +129,6 @@ fun AddInformationButtonSection(
         if (buttonState == ButtonState.POST) {
             OutlinedButton(
                 shape = RoundedCornerShape(MEDIUM_PADDING),
-                elevation = ButtonDefaults.buttonElevation(defaultElevation = SMALL_PADDING),
                 onClick = onCancelClick
             ) {
                 Icon(
