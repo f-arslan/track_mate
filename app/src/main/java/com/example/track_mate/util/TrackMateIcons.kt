@@ -3,6 +3,7 @@ package com.example.track_mate.util
 import androidx.annotation.DrawableRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
@@ -11,6 +12,7 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.SaveAlt
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.example.track_mate.R.drawable as AppIcon
 
 object TrackMateIcons {
     val HomeOutline = Icons.Outlined.Home
@@ -21,7 +23,10 @@ object TrackMateIcons {
     val BackArrow = Icons.Filled.ArrowBack
     val SaveAlt = Icons.Outlined.SaveAlt
     val Person = Icons.Filled.Person
+    val ForwardArrow = AppIcon.baseline_arrow_forward_24
 }
+
+
 
 
 

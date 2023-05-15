@@ -13,6 +13,7 @@ object Constants {
     val HIGH_PADDING = 16.dp
     val VERY_HIGH_PADDING = 24.dp
     val MAX_PADDING = 32.dp
+    val VERY_MAX_PADDING = 48.dp
     val BOTTOM_NAV_PADDING = 80.dp
     val NAV_RAIL_WIDTH = 80.dp
     val ICON_SIZE = 64.dp

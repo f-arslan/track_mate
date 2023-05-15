@@ -34,7 +34,6 @@ import com.example.track_mate.util.Constants.HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.NO_PADDING
-import com.example.track_mate.util.Constants.SMALL_PADDING
 import com.example.track_mate.util.Constants.VERY_SMALL_PADDING
 
 @Composable

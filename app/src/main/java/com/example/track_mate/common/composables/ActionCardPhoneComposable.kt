@@ -30,8 +30,9 @@ import com.example.track_mate.R.drawable as AppIcon
 fun ActionCardPhone(
     action: Action
 ) {
-    ActionSurfaceWrapper(
-        modifier = Modifier.padding(SMALL_MEDIUM_PADDING)
+    SurfaceWrapper(
+        modifier = Modifier.padding(SMALL_MEDIUM_PADDING),
+        tonalElevation = SMALL_MEDIUM_PADDING
     ) {
         Column {
             ActionStatusRow(

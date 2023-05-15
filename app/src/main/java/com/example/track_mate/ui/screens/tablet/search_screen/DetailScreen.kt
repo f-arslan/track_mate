@@ -15,16 +15,17 @@ import com.example.track_mate.ui.screens.view_models.DetailScreenViewModel
 @Composable
 fun DetailScreen(
     student: Student,
-    detailScreenViewModelApp: DetailScreenViewModel = hiltViewModel()
+    viewModel: DetailScreenViewModel = hiltViewModel()
 ) {
-    detailScreenViewModelApp.initStudent(student.id)
-    val allActions by detailScreenViewModelApp.allActions.collectAsState()
+    viewModel.initStudent(student.id)
+    val allActions by viewModel.allActions.collectAsState()
+
     when (allActions) {
         is RequestState.Success -> {
             ActionGrid(
                 data = (allActions as RequestState.Success<List<Action>>).data,
-                finishActionClick = detailScreenViewModelApp::finishAction,
-                deleteActionClick = detailScreenViewModelApp::deleteAction
+                finishActionClick = viewModel::finishAction,
+                deleteActionClick = viewModel::deleteAction
             )
         }
         else -> {

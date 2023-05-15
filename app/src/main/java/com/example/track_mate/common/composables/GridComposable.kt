@@ -15,10 +15,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.track_mate.core.model.Action
-import com.example.track_mate.util.Constants.BOTTOM_NAV_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
-import com.example.track_mate.util.Constants.SMALL_MEDIUM_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING
 
 @Composable
@@ -29,6 +27,17 @@ fun ActionGrid(
     deleteActionClick: (String) -> Unit,
 ) {
     var isScrollable by remember { mutableStateOf(true) }
+    val selectedItemToDelete = remember { mutableStateOf<Action?>(null) }
+    var dialogState by remember { mutableStateOf(false) }
+    fun showDeleteConfirmationDialog(item: Action) {
+        selectedItemToDelete.value = item
+        dialogState = true
+    }
+    if (dialogState) AppDialog(updateDialogState = {dialogState = it}) {
+        selectedItemToDelete.value?.let { deleteActionClick(it.id) }
+        dialogState = false
+    }
+    
     LazyVerticalGrid(
         modifier = modifier
             .fillMaxSize()
@@ -39,12 +48,17 @@ fun ActionGrid(
         verticalArrangement = Arrangement.spacedBy(MEDIUM_PADDING),
         contentPadding = PaddingValues(SMALL_PADDING)
     ) {
-        items(items = data, key = { it.id }) { item ->
-            ActionCard(action = item, onApproveClick = {
-                isScrollable = false
-                finishActionClick(item)
-                isScrollable = true
-            }, onDeleteClick = { deleteActionClick(item.id) })
+        items(items = data,
+            key = { it.id }) { item ->
+            ActionCard(action = item,
+                onApproveClick = {
+                    isScrollable = false
+                    finishActionClick(item)
+                    isScrollable = true
+                },
+                onDeleteClick = {
+                    showDeleteConfirmationDialog(item) 
+                })
         }
     }
 }
@@ -61,7 +75,8 @@ fun DetailGridPhone(
         columns = GridCells.Adaptive(175.dp),
         contentPadding = PaddingValues(SMALL_PADDING)
     ) {
-        items(items = items, key = { it.id }) {
+        items(items = items,
+            key = { it.id }) {
             ActionCardPhone(action = it)
         }
     }

@@ -13,6 +13,7 @@
     <string name="personals">Personals</string>
     <string name="descriptions">Descriptions</string>
     <string name="given_times">Given Times</string>
+    <string name="full_name">Full Name</string>
     <string name="add_information_screen">Add Information</string>
     <string name="delete_information_screen">Delete Information</string>
     <string name="done">Done</string>
@@ -21,6 +22,10 @@
     <string name="successfully_uploaded">Successfully uploaded</string>
     <string name="sections">Sections</string>
     <string name="results">Results</string>
+    <string name="have_an_account">Have an account?</string>
+    <string name="login">Login</string>
+    <string name="display_title">Student Check-in</string>
+    <string name="display_text">Stay organized and on top of your schedule with our student check-in system - the perfect tool for busy students!</string>
 
     <!-- Common -->
     <string name="email">Email</string>
@@ -39,7 +44,7 @@
 
     <!-- SignUpScreen -->
     <string name="sign_up">Sign Up</string>
-    <string name="create_account">Create account</string>
+    <string name="create_account">Create an Account</string>
     <string name="password_error">Your password should have at least six digits and include one digit, one lower case letter and one upper case letter.</string>
     <string name="password_match_error">Passwords do not match.</string>
     <string name="already_added">You already added this item</string>

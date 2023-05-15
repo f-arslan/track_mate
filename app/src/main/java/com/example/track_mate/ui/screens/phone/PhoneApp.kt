@@ -6,7 +6,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import com.example.track_mate.ACTION_DETAIL_SCREEN_PHONE
 import com.example.track_mate.HOME_SCREEN_PHONE
 import com.example.track_mate.common.composables.BottomBarPhone
 import com.example.track_mate.rememberAppState

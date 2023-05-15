@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val widthSizeClass = calculateWindowSizeClass(activity = this).widthSizeClass
             val heightSizeClass = calculateWindowSizeClass(activity = this).heightSizeClass
-            TrackMateApp(widthSizeClass, heightSizeClass)
+            TrackMateApp(widthSizeClass)
         }
     }
 }

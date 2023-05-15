@@ -19,7 +19,6 @@ import com.example.track_mate.ui.screens.RequestState
 import com.example.track_mate.ui.screens.graph.TopLevelDestination
 import com.example.track_mate.ui.screens.view_models.HomeScreenViewModelApp
 import com.example.track_mate.util.Constants.HIGH_PADDING
-import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.VERY_SMALL_PADDING
 import com.example.track_mate.util.TrackMateIcons
 

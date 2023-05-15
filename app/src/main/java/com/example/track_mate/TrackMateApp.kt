@@ -4,7 +4,6 @@ import android.content.res.Resources
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
@@ -22,14 +21,17 @@ import com.example.track_mate.ui.theme.TrackMateTheme
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
-fun TrackMateApp(widthSizeClass: WindowWidthSizeClass, heighthSizeClass: WindowHeightSizeClass) {
+fun TrackMateApp(
+    widthSizeClass: WindowWidthSizeClass
+) {
     TrackMateTheme {
         // A surface container using the 'background' color from the theme
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            val isTabletScreen = widthSizeClass == WindowWidthSizeClass.Expanded
+            val isTabletScreen =
+                widthSizeClass == WindowWidthSizeClass.Expanded || widthSizeClass == WindowWidthSizeClass.Medium
             if (isTabletScreen) TabletApp()
             else PhoneApp()
         }
@@ -49,7 +51,16 @@ fun rememberAppState(
     snackbarManager: SnackbarManager = SnackbarManager,
     resources: Resources = resources(),
     coroutineScope: CoroutineScope = rememberCoroutineScope()
-) =
-    remember(navController, snackbarManager, resources, coroutineScope) {
-        TrackMateAppState(navController, snackbarManager, resources, coroutineScope)
-    }
+) = remember(
+    navController,
+    snackbarManager,
+    resources,
+    coroutineScope
+) {
+    TrackMateAppState(
+        navController,
+        snackbarManager,
+        resources,
+        coroutineScope
+    )
+}
