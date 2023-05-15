@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
@@ -26,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.example.track_mate.R
 import com.example.track_mate.core.model.ActionStatus
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
+import com.example.track_mate.util.Constants.NO_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING
 import com.example.track_mate.util.Constants.VERY_HIGH_PADDING
 import com.example.track_mate.R.drawable as AppIcon

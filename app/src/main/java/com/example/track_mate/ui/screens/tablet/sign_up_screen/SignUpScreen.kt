@@ -1,10 +1,12 @@
 package com.example.track_mate.ui.screens.tablet.sign_up_screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -57,7 +59,7 @@ fun SignUpScreen(
 ) {
     Row(modifier = Modifier.fillMaxSize()) {
         InformationSection(modifier = Modifier.weight(0.5f))
-        FormSection(
+        FormSectionSignUp(
             modifier = Modifier.weight(0.5f),
             uiState,
             onNameChange,
@@ -70,7 +72,7 @@ fun SignUpScreen(
 }
 
 @Composable
-fun FormSection(
+fun FormSectionSignUp(
     modifier: Modifier,
     uiState: SignUpUiState,
     onNameChange: (String) -> Unit,
@@ -80,7 +82,9 @@ fun FormSection(
     onSignUpClick: () -> Unit
 ) {
     Surface(modifier = modifier.fillMaxHeight()) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Spacer(Modifier.height(VERY_HIGH_PADDING))
             Text(
                 text = stringResource(AppText.create_account),
@@ -94,11 +98,16 @@ fun FormSection(
             Spacer(modifier = Modifier.height(MEDIUM_HIGH_PADDING))
             PasswordField(uiState.password, AppText.password, onPasswordChange)
             Spacer(modifier = Modifier.height(MEDIUM_HIGH_PADDING))
-            PasswordField(uiState.rePassword, AppText.repeat_password, onConfirmPasswordChange)
-            Spacer(modifier = Modifier.height(HIGH_PADDING))
-            AppExtendedButton(
-                modifier = Modifier, AppText.sign_up, TrackMateIcons.ForwardArrow, onSignUpClick
-            )
+            Column(modifier = Modifier.width(IntrinsicSize.Max)) {
+                PasswordField(uiState.rePassword, AppText.repeat_password, onConfirmPasswordChange)
+                Spacer(modifier = Modifier.height(HIGH_PADDING))
+                AppExtendedButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    AppText.sign_up,
+                    TrackMateIcons.ForwardArrow,
+                    onSignUpClick
+                )
+            }
             Spacer(Modifier.height(VERY_MAX_PADDING))
             Row {
                 Text(stringResource(AppText.have_an_account))
