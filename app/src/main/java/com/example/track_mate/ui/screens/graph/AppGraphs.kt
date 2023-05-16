@@ -15,11 +15,17 @@ import com.example.track_mate.PRESENTATION_SCREEN_TABLET
 import com.example.track_mate.SEARCH_SCREEN_PHONE
 import com.example.track_mate.SEARCH_SCREEN_TABLET
 import com.example.track_mate.SETTING_SCREEN_TABLET
+import com.example.track_mate.SIGN_IN_SCREEN_TABLET
+import com.example.track_mate.SIGN_UP_SCREEN_TABLET
+import com.example.track_mate.SPLASH_SCREEN
+import com.example.track_mate.TABLET_APP
 import com.example.track_mate.TrackMateAppState
 import com.example.track_mate.core.model.Student
+import com.example.track_mate.ui.screens.SplashScreenProvider
 import com.example.track_mate.ui.screens.phone.home_screen.HomeScreenPhone
 import com.example.track_mate.ui.screens.phone.search_screen.DetailScreenPhone
 import com.example.track_mate.ui.screens.phone.search_screen.SearchScreenPhone
+import com.example.track_mate.ui.screens.tablet.TabletApp
 import com.example.track_mate.ui.screens.tablet.home_screen.HomeScreenTablet
 import com.example.track_mate.ui.screens.tablet.search_screen.AddActionScreen
 import com.example.track_mate.ui.screens.tablet.search_screen.DetailScreen
@@ -28,9 +34,11 @@ import com.example.track_mate.ui.screens.tablet.setting_screen.AddInformationScr
 import com.example.track_mate.ui.screens.tablet.setting_screen.DeleteInformationScreen
 import com.example.track_mate.ui.screens.tablet.setting_screen.SettingPresentationScreen
 import com.example.track_mate.ui.screens.tablet.setting_screen.SettingScreenTablet
+import com.example.track_mate.ui.screens.tablet.sign_in_screen.SignInScreenProvider
+import com.example.track_mate.ui.screens.tablet.sign_up_screen.SignUpScreenProvider
 
 
-fun NavGraphBuilder.tabletGraph() {
+fun NavGraphBuilder.tabletGraph(appState: TrackMateAppState) {
     composable(SEARCH_SCREEN_TABLET.route) {
         SearchScreenTablet()
     }
@@ -42,9 +50,31 @@ fun NavGraphBuilder.tabletGraph() {
     }
 }
 
+fun NavGraphBuilder.topLevelTabletGraph(appState: TrackMateAppState) {
+    composable(SPLASH_SCREEN) {
+        SplashScreenProvider(popUpAndNavigate = {
+            appState.navigateAndPopUp(
+                SIGN_IN_SCREEN_TABLET, SPLASH_SCREEN
+            )
+        })
+    }
+
+    composable(SIGN_UP_SCREEN_TABLET) {
+        SignUpScreenProvider()
+    }
+    composable(SIGN_IN_SCREEN_TABLET) {
+        SignInScreenProvider()
+    }
+
+    composable(TABLET_APP) {
+        TabletApp()
+    }
+
+
+}
+
 fun NavGraphBuilder.searchScreenGraph(
-    appState: TrackMateAppState,
-    student: Student
+    appState: TrackMateAppState, student: Student
 ) {
     composable(ACTION_DETAIL_SCREEN_TABLET) {
         DetailScreen(student = student)
@@ -52,8 +82,7 @@ fun NavGraphBuilder.searchScreenGraph(
 
     composable(ADD_ACTION_SCREEN_TABLET) {
         AddActionScreen(
-            popUp = { appState.popUp() },
-            student = student
+            popUp = { appState.popUp() }, student = student
         )
     }
 }
@@ -76,8 +105,7 @@ fun NavGraphBuilder.phoneGraph(appState: TrackMateAppState) {
     composable(SEARCH_SCREEN_PHONE.route) {
         SearchScreenPhone(onItemClick = { studentId ->
             appState.navigateWithArgument(
-                route = ACTION_DETAIL_SCREEN_PHONE,
-                argument = studentId
+                route = ACTION_DETAIL_SCREEN_PHONE, argument = studentId
             )
         })
 
@@ -93,8 +121,7 @@ fun NavGraphBuilder.phoneGraph(appState: TrackMateAppState) {
         })
     ) {
         DetailScreenPhone(
-            popUp = { appState.popUp() },
-            studentId = it.arguments?.getString("studentId") ?: ""
+            popUp = { appState.popUp() }, studentId = it.arguments?.getString("studentId") ?: ""
         )
     }
 }

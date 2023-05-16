@@ -13,8 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.example.track_mate.common.snackbar.SnackbarManager
+import com.example.track_mate.ui.screens.graph.topLevelTabletGraph
 import com.example.track_mate.ui.screens.phone.PhoneApp
 import com.example.track_mate.ui.screens.tablet.TabletApp
 import com.example.track_mate.ui.theme.TrackMateTheme
@@ -27,13 +29,17 @@ fun TrackMateApp(
     TrackMateTheme {
         // A surface container using the 'background' color from the theme
         Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
+            modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {
+            val tAppState = rememberAppState()
+            val pAppState = rememberAppState()
             val isTabletScreen =
                 widthSizeClass == WindowWidthSizeClass.Expanded || widthSizeClass == WindowWidthSizeClass.Medium
-            if (isTabletScreen) TabletApp()
-            else PhoneApp()
+            if (isTabletScreen) {
+                NavHost(navController = tAppState.navController, startDestination = SPLASH_SCREEN) {
+                    topLevelTabletGraph(tAppState)
+                }
+            } else PhoneApp()
         }
     }
 }
@@ -52,15 +58,9 @@ fun rememberAppState(
     resources: Resources = resources(),
     coroutineScope: CoroutineScope = rememberCoroutineScope()
 ) = remember(
-    navController,
-    snackbarManager,
-    resources,
-    coroutineScope
+    navController, snackbarManager, resources, coroutineScope
 ) {
     TrackMateAppState(
-        navController,
-        snackbarManager,
-        resources,
-        coroutineScope
+        navController, snackbarManager, resources, coroutineScope
     )
 }

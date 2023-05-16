@@ -1,5 +1,7 @@
 [versions]
-com-android-application = "8.2.0-alpha03"
+accompanistSystemuicontroller = "0.28.0"
+com-android-application = "8.2.0-alpha04"
+coreSplashscreen = "1.0.1"
 firebaseAnalyticsKtx = "21.2.2"
 firebaseAuthKtx = "22.0.0"
 firebaseCrashlyticsGradle = "2.9.5"
@@ -7,9 +9,10 @@ firebaseCrashlyticsKtx = "18.3.7"
 firebaseDatabaseKtx = "20.2.1"
 firebasePerfKtx = "20.3.2"
 googleServices = "4.3.15"
-gradle = "8.2.0-alpha03"
+gradle = "8.2.0-alpha04"
 hiltAndroidCompiler = "2.44.2"
 hiltNavigationCompose = "1.0.0"
+lottieCompose = "5.2.0"
 materialIconsExtended = "1.4.3"
 opencsv = "5.5.2"
 org-jetbrains-kotlin-android = "1.8.0"
@@ -26,6 +29,8 @@ windowSizeClass = "1.0.1"
 navigation = "2.5.3"
 
 [libraries]
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -45,6 +50,7 @@ espresso-core = { group = "androidx.test.espresso", name = "espresso-core", vers
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
 opencsv = { module = "com.opencsv:opencsv", version.ref = "opencsv" }
 perf-plugin = { module = "com.google.firebase:perf-plugin", version.ref = "perfPlugin" }
 ui = { group = "androidx.compose.ui", name = "ui" }

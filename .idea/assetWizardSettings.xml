@@ -79,8 +79,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\fatih\Downloads\app_icon.png" />
-                                                <entry key="scalingPercent" value="71" />
+                                                <entry key="imagePath" value="C:\Users\fatih\Downloads\app_icon.jpg" />
+                                                <entry key="scalingPercent" value="75" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -311,8 +311,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="baseline_arrow_forward_24" />
-                            <entry key="sourceFile" value="C:\Users\fatih\Desktop\track_mate" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="logo" />
+                            <entry key="sourceFile" value="C:\Users\fatih\Downloads\logo.svg" />
                           </map>
                         </option>
                       </PersistentState>

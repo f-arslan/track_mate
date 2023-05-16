@@ -34,11 +34,13 @@ import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING
 import com.example.track_mate.util.Constants.VERY_MAX_PADDING
 import com.example.track_mate.util.TrackMateIcons
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.example.track_mate.R.string as AppText
 
 @Composable
 fun SignInScreenProvider(viewModel: SignInViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState
+    rememberSystemUiController().setStatusBarColor(MaterialTheme.colorScheme.surfaceTint)
     SignInScreen(
         uiState,
         onEmailChange = viewModel::onEmailChange,

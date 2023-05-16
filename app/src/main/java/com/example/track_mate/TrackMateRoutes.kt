@@ -12,8 +12,9 @@ data class Route(
 const val SPLASH_SCREEN = "SplashScreen"
 
 // Tablet screens
-const val LOGIN_SCREEN_TABLET = "LoginScreenTablet"
+const val SIGN_IN_SCREEN_TABLET = "LoginScreenTablet"
 const val SIGN_UP_SCREEN_TABLET = "SignUpScreenTablet"
+const val TABLET_APP = "TabletApp"
 val HOME_SCREEN_TABLET = Route(route = "HomeScreenTablet", iconOutline = AppIcon.outline_home_24, iconFilled = AppIcon.baseline_home_24)
 val SEARCH_SCREEN_TABLET = Route(route = "SearchScreenTablet", iconOutline = AppIcon.baseline_search_24)
 const val EMPTY_DETAIL_SCREEN_TABLET = "EmptyDetailScreenTablet"
