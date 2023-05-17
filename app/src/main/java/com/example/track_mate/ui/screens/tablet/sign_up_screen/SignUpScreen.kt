@@ -10,11 +10,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -35,21 +40,27 @@ import com.example.track_mate.util.Constants.VERY_MAX_PADDING
 import com.example.track_mate.util.TrackMateIcons
 import com.example.track_mate.R.string as AppText
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpScreenProvider(viewModel: SignUpScreenViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState
-    SignUpScreen(
-        uiState,
-        onNameChange = viewModel::onNameChange,
-        onEmailChange = viewModel::onEmailChange,
-        onPasswordChange = viewModel::onPasswordChange,
-        onConfirmPasswordChange = viewModel::onRePasswordChange,
-        onSignUpClick = viewModel::onSignUpClick
-    )
+    val snackbarHostState = remember { SnackbarHostState() }
+    Scaffold(snackbarHost = { SnackbarHost(snackbarHostState) }) {
+        SignUpScreen(Modifier.padding(it),
+            uiState,
+            onNameChange = viewModel::onNameChange,
+            onEmailChange = viewModel::onEmailChange,
+            onPasswordChange = viewModel::onPasswordChange,
+            onConfirmPasswordChange = viewModel::onRePasswordChange,
+            onSignUpClick = {
+                viewModel.onSignUpClick(snackbarHostState)
+            })
+    }
 }
 
 @Composable
 fun SignUpScreen(
+    modifier: Modifier,
     uiState: SignUpUiState,
     onNameChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,
@@ -153,5 +164,5 @@ fun InformationSection(modifier: Modifier) {
 @Preview(showBackground = true, device = "id:pixel_tablet")
 @Composable
 fun SignUpPreview() {
-    SignUpScreen(uiState = SignUpUiState(), {}, {}, {}, {}, {})
+    SignUpScreen(Modifier, uiState = SignUpUiState(), {}, {}, {}, {}, {})
 }

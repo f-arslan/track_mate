@@ -112,7 +112,7 @@ fun FormSectionSignIn(
                 )
                 Spacer(Modifier.padding(top = HIGH_PADDING))
                 AppExtendedButton(
-                    Modifier.fillMaxWidth(), AppText.sign_up, TrackMateIcons.ForwardArrow, onSignInClick
+                    Modifier.fillMaxWidth(), AppText.sign_in, TrackMateIcons.ForwardArrow, onSignInClick
                 )
             }
             Spacer(Modifier.padding(top = VERY_MAX_PADDING))

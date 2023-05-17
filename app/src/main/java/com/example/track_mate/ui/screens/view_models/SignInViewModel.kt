@@ -1,6 +1,9 @@
 package com.example.track_mate.ui.screens.view_models
 
 import androidx.compose.runtime.mutableStateOf
+import com.example.track_mate.common.ext.isValidEmail
+import com.example.track_mate.common.ext.isValidPassword
+import com.example.track_mate.common.ext.passwordMatches
 import com.example.track_mate.core.model.service.StorageService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

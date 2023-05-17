@@ -21,5 +21,7 @@ object Constants {
     const val STILL_OUTSIDE = "Still Outside"
     const val PERSONAL = "Personal"
     const val DESCRIPTION = "Description"
-    const val HOME = "Home"
+    const val EMAIL_ERROR = "Please insert a valid email."
+    const val PASSWORD_ERROR = "Your password should have at least six digits and include one digit, one lower case letter and one upper case letter."
+    const val PASSWORD_MATCH_ERROR = "Passwords do not match."
 }

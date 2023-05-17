@@ -92,6 +92,8 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.lottie.compose)
     implementation(libs.accompanist.systemuicontroller)
+
+    implementation (libs.accompanist.permissions)
 }
 kapt {
     correctErrorTypes = true

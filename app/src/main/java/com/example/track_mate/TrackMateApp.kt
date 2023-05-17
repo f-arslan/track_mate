@@ -1,6 +1,9 @@
 package com.example.track_mate
 
+import android.Manifest
 import android.content.res.Resources
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -15,11 +18,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.example.track_mate.common.composables.PermissionDialog
+import com.example.track_mate.common.composables.RationaleDialog
 import com.example.track_mate.common.snackbar.SnackbarManager
 import com.example.track_mate.ui.screens.graph.topLevelTabletGraph
 import com.example.track_mate.ui.screens.phone.PhoneApp
-import com.example.track_mate.ui.screens.tablet.TabletApp
 import com.example.track_mate.ui.theme.TrackMateTheme
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
+import com.google.accompanist.permissions.shouldShowRationale
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
@@ -27,17 +35,20 @@ fun TrackMateApp(
     widthSizeClass: WindowWidthSizeClass
 ) {
     TrackMateTheme {
-        // A surface container using the 'background' color from the theme
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            RequestNotificationPermissionDialog()
+        }
+        
         Surface(
             modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {
-            val tAppState = rememberAppState()
+            val tabletAppState = rememberAppState()
             val pAppState = rememberAppState()
             val isTabletScreen =
                 widthSizeClass == WindowWidthSizeClass.Expanded || widthSizeClass == WindowWidthSizeClass.Medium
             if (isTabletScreen) {
-                NavHost(navController = tAppState.navController, startDestination = SPLASH_SCREEN) {
-                    topLevelTabletGraph(tAppState)
+                NavHost(navController = tabletAppState.navController, startDestination = SPLASH_SCREEN) {
+                    topLevelTabletGraph(tabletAppState)
                 }
             } else PhoneApp()
         }
@@ -63,4 +74,15 @@ fun rememberAppState(
     TrackMateAppState(
         navController, snackbarManager, resources, coroutineScope
     )
+}
+
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun RequestNotificationPermissionDialog() {
+    val permissionState = rememberPermissionState(permission = Manifest.permission.POST_NOTIFICATIONS)
+    if (!permissionState.status.isGranted) {
+        if (permissionState.status.shouldShowRationale) RationaleDialog()
+        else PermissionDialog { permissionState.launchPermissionRequest() }
+    }
 }

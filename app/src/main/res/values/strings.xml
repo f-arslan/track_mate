@@ -31,6 +31,7 @@
     <string name="not_a_member">Not a member?</string>
     <string name="register_now">Register now</string>
     <string name="display_text">Stay organized and on top of your schedule with our student check-in system - the perfect tool for busy students!</string>
+    <string name="ok">OK</string>
 
     <!-- Common -->
     <string name="email">Email</string>
@@ -55,4 +56,11 @@
     <string name="already_added">You already added this item</string>
     <string name="maximum_size_message">You reached the maximum number of items to delete</string>
     <string name="your_file_save_as_csv">Your file save as %s.csv</string>
+
+    <!-- FCM -->
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="request_notification_permission">Request permission</string>
+    <string name="notification_permission_title">Notification permission</string>
+    <string name="notification_permission_description">The notification permission is important for this app. Please grant the permission.</string>
+    <string name="notification_permission_settings">The notification permission is important for this app. Please navigate to your device settings and enable notifications for Make it So.</string>
 </resources>

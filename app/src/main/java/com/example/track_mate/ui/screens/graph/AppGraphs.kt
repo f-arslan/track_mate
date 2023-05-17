@@ -54,7 +54,7 @@ fun NavGraphBuilder.topLevelTabletGraph(appState: TrackMateAppState) {
     composable(SPLASH_SCREEN) {
         SplashScreenProvider(popUpAndNavigate = {
             appState.navigateAndPopUp(
-                SIGN_IN_SCREEN_TABLET, SPLASH_SCREEN
+                SIGN_UP_SCREEN_TABLET, SPLASH_SCREEN
             )
         })
     }
