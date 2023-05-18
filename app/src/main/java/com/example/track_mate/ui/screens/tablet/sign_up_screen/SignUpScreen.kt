@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.track_mate.common.composables.AppExtendedButton
 import com.example.track_mate.common.composables.EmailField
+import com.example.track_mate.common.composables.InformationSection
 import com.example.track_mate.common.composables.PasswordField
 import com.example.track_mate.ui.screens.view_models.SignUpScreenViewModel
 import com.example.track_mate.ui.screens.view_models.SignUpUiState
@@ -68,7 +69,7 @@ fun SignUpScreen(
     onConfirmPasswordChange: (String) -> Unit,
     onSignUpClick: () -> Unit
 ) {
-    Row(modifier = Modifier.fillMaxSize()) {
+    Row(modifier = Modifier.fillMaxSize().then(modifier)) {
         InformationSection(modifier = Modifier.weight(0.5f))
         FormSectionSignUp(
             modifier = Modifier.weight(0.5f),
@@ -129,33 +130,6 @@ fun FormSectionSignUp(
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
             }
-        }
-    }
-}
-
-
-@Composable
-fun InformationSection(modifier: Modifier) {
-    Surface(
-        modifier = modifier.fillMaxHeight(), color = MaterialTheme.colorScheme.secondaryContainer
-    ) {
-        Column(modifier = Modifier.padding(VERY_HIGH_PADDING)) {
-            Text(
-                text = stringResource(AppText.app_name),
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.SemiBold
-            )
-            Spacer(Modifier.height(VERY_HIGH_PADDING))
-            Text(
-                text = stringResource(AppText.display_title),
-                style = MaterialTheme.typography.displayLarge,
-                fontWeight = FontWeight.SemiBold
-            )
-            Spacer(Modifier.height(SMALL_PADDING))
-            Text(
-                text = stringResource(AppText.display_text),
-                style = MaterialTheme.typography.headlineSmall
-            )
         }
     }
 }

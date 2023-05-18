@@ -23,8 +23,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.track_mate.common.composables.AppExtendedButton
 import com.example.track_mate.common.composables.EmailField
+import com.example.track_mate.common.composables.InformationSection
 import com.example.track_mate.common.composables.PasswordField
-import com.example.track_mate.ui.screens.tablet.sign_up_screen.InformationSection
 import com.example.track_mate.ui.screens.view_models.SignInUiState
 import com.example.track_mate.ui.screens.view_models.SignInViewModel
 import com.example.track_mate.util.Constants.HIGH_PADDING

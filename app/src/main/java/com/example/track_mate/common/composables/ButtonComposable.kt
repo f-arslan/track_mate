@@ -11,7 +11,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
@@ -27,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import com.example.track_mate.R
 import com.example.track_mate.core.model.ActionStatus
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
-import com.example.track_mate.util.Constants.NO_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING
 import com.example.track_mate.util.Constants.VERY_HIGH_PADDING
 import com.example.track_mate.R.drawable as AppIcon
@@ -36,35 +34,26 @@ import com.example.track_mate.R.drawable as AppIcon
 fun FloatingActionButtonApp(
     onClick: () -> Unit
 ) {
-    ExtendedFloatingActionButton(
-        text = {
-            Text(
-                text = stringResource(R.string.add),
-                fontWeight = FontWeight.SemiBold
-            )
-        },
-        icon = {
-            Icon(
-                imageVector = Icons.Outlined.Edit,
-                contentDescription = null
-            )
-        },
-        shape = RoundedCornerShape(MEDIUM_PADDING),
-        onClick = onClick
+    ExtendedFloatingActionButton(text = {
+        Text(
+            text = stringResource(R.string.add), fontWeight = FontWeight.SemiBold
+        )
+    }, icon = {
+        Icon(
+            imageVector = Icons.Outlined.Edit, contentDescription = null
+        )
+    }, shape = RoundedCornerShape(MEDIUM_PADDING), onClick = onClick
     )
 }
 
 @Composable
 fun ActionButtons(
-    status: ActionStatus,
-    onApproveClick: () -> Unit,
-    onDeleteClick: () -> Unit
+    status: ActionStatus, onApproveClick: () -> Unit, onDeleteClick: () -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(MEDIUM_PADDING)) {
         if (status == ActionStatus.ON_GOING) {
             Button(
-                onClick = onApproveClick,
-                shape = RoundedCornerShape(
+                onClick = onApproveClick, shape = RoundedCornerShape(
                     MEDIUM_PADDING
                 )
             ) {
@@ -75,8 +64,7 @@ fun ActionButtons(
             }
         }
         OutlinedButton(
-            onClick = onDeleteClick,
-            shape = RoundedCornerShape(MEDIUM_PADDING)
+            onClick = onDeleteClick, shape = RoundedCornerShape(MEDIUM_PADDING)
         ) {
             Icon(
                 painterResource(AppIcon.outline_cancel_24),
@@ -88,20 +76,12 @@ fun ActionButtons(
 
 @Composable
 fun AppExtendedButton(
-    modifier: Modifier = Modifier,
-    @StringRes text: Int,
-    @DrawableRes icon: Int,
-    onClick: () -> Unit
+    modifier: Modifier = Modifier, @StringRes text: Int, @DrawableRes icon: Int, onClick: () -> Unit
 ) {
     ExtendedFloatingActionButton(onClick = onClick,
         modifier = modifier,
-        text = { Text(stringResource(text)) },
-        icon = {
-            Icon(
-                painterResource(icon),
-                contentDescription = null
-            )
-        })
+        text = { Text(stringResource(text), fontWeight = FontWeight.SemiBold) },
+        icon = { Icon(painterResource(icon), null) })
 }
 
 
@@ -110,12 +90,10 @@ fun DeleteUploadButton(
     onClick: () -> Unit = {}
 ) {
     Button(
-        shape = RoundedCornerShape(SMALL_PADDING),
-        onClick = onClick
+        shape = RoundedCornerShape(SMALL_PADDING), onClick = onClick
     ) {
         Icon(
-            painter = painterResource(AppIcon.baseline_delete_outline_24),
-            contentDescription = null
+            painter = painterResource(AppIcon.baseline_delete_outline_24), contentDescription = null
         )
     }
 }
@@ -125,9 +103,7 @@ private val buttonHeight = 50.dp
 
 @Composable
 fun DeleteSectionButton(
-    @StringRes text: Int,
-    enabled: Boolean = true,
-    onClick: () -> Unit = {}
+    @StringRes text: Int, enabled: Boolean = true, onClick: () -> Unit = {}
 ) {
     Button(
         modifier = Modifier

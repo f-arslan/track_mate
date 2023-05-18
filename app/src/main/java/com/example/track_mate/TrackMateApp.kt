@@ -43,7 +43,7 @@ fun TrackMateApp(
             modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {
             val tabletAppState = rememberAppState()
-            val pAppState = rememberAppState()
+            val phoneAppState = rememberAppState()
             val isTabletScreen =
                 widthSizeClass == WindowWidthSizeClass.Expanded || widthSizeClass == WindowWidthSizeClass.Medium
             if (isTabletScreen) {
