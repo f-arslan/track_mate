@@ -43,7 +43,10 @@ import com.example.track_mate.R.string as AppText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreenProvider(viewModel: SignUpScreenViewModel = hiltViewModel()) {
+fun SignUpScreenProvider(
+    viewModel: SignUpScreenViewModel = hiltViewModel(),
+    openAndPopUp: () -> Unit
+) {
     val uiState by viewModel.uiState
     val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(snackbarHost = { SnackbarHost(snackbarHostState) }) {
@@ -54,7 +57,7 @@ fun SignUpScreenProvider(viewModel: SignUpScreenViewModel = hiltViewModel()) {
             onPasswordChange = viewModel::onPasswordChange,
             onConfirmPasswordChange = viewModel::onRePasswordChange,
             onSignUpClick = {
-                viewModel.onSignUpClick(snackbarHostState)
+                viewModel.onSignUpClick(snackbarHostState, openAndPopUp)
             })
     }
 }
@@ -69,7 +72,9 @@ fun SignUpScreen(
     onConfirmPasswordChange: (String) -> Unit,
     onSignUpClick: () -> Unit
 ) {
-    Row(modifier = Modifier.fillMaxSize().then(modifier)) {
+    Row(modifier = Modifier
+        .fillMaxSize()
+        .then(modifier)) {
         InformationSection(modifier = Modifier.weight(0.5f))
         FormSectionSignUp(
             modifier = Modifier.weight(0.5f),

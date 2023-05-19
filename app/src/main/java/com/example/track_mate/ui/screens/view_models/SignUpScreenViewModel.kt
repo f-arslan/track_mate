@@ -1,22 +1,25 @@
 package com.example.track_mate.ui.screens.view_models
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.res.stringResource
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import com.example.track_mate.common.ext.isValidEmail
 import com.example.track_mate.common.ext.isValidPassword
 import com.example.track_mate.common.ext.passwordMatches
+import com.example.track_mate.core.model.service.AuthRepository
+import com.example.track_mate.core.model.service.SendEmailVerificationResponse
+import com.example.track_mate.core.model.service.SignUpResponse
 import com.example.track_mate.core.model.service.StorageService
+import com.example.track_mate.core.model.service.module.Response
 import com.example.track_mate.util.Constants.EMAIL_ERROR
 import com.example.track_mate.util.Constants.PASSWORD_ERROR
 import com.example.track_mate.util.Constants.PASSWORD_MATCH_ERROR
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.example.track_mate.R.string as AppText
 
 data class SignUpUiState(
     val fullName: String = "",
@@ -26,13 +29,24 @@ data class SignUpUiState(
 )
 
 @HiltViewModel
-class SignUpScreenViewModel @Inject constructor(private val storageService: StorageService) :
-    AppViewModel() {
+class SignUpScreenViewModel @Inject constructor(
+    private val storageService: StorageService,
+    private val authRepository: AuthRepository
+) : AppViewModel() {
     var uiState = mutableStateOf(SignUpUiState())
         private set
 
+    var signUpResponse by mutableStateOf<SignUpResponse>(Response.Success(false))
+        private set
+    var sendEmailVerificationResponse by mutableStateOf<SendEmailVerificationResponse>(
+        Response.Success(
+            false
+        )
+    )
+        private set
+
     private val email
-        get() = uiState.value.email
+        get() = uiState.value.email.trim()
 
     private val password
         get() = uiState.value.password
@@ -53,7 +67,10 @@ class SignUpScreenViewModel @Inject constructor(private val storageService: Stor
         uiState.value = uiState.value.copy(rePassword = newValue)
     }
 
-    fun onSignUpClick(snackbarHostState: SnackbarHostState) {
+    fun onSignUpClick(
+        snackbarHostState: SnackbarHostState,
+        openAndPopUp: () -> Unit,
+    ) {
         viewModelScope.launch {
             if (!email.isValidEmail()) {
                 snackbarHostState.showSnackbar(
@@ -66,7 +83,7 @@ class SignUpScreenViewModel @Inject constructor(private val storageService: Stor
             if (!password.isValidPassword()) {
                 snackbarHostState.showSnackbar(
                     message = PASSWORD_ERROR,
-                    duration = SnackbarDuration.Short,
+                    duration = SnackbarDuration.Indefinite,
                     withDismissAction = true
                 )
                 return@launch
@@ -79,7 +96,9 @@ class SignUpScreenViewModel @Inject constructor(private val storageService: Stor
                 )
                 return@launch
             }
-
+            signUpResponse = Response.Loading
+            signUpResponse = authRepository.firebaseSignUpWithEmailAndPassword(email, password)
+            openAndPopUp()
         }
     }
 }

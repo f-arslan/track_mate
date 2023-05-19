@@ -2,6 +2,7 @@ package com.example.track_mate.common.composables
 
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,7 +22,7 @@ fun BottomBarPhone(
         HOME_SCREEN_PHONE,
         SEARCH_SCREEN_PHONE
     )
-    BottomAppBar{
+    NavigationBar{
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
         destinations.forEach { destination ->

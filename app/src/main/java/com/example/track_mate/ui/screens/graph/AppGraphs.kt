@@ -1,5 +1,6 @@
 package com.example.track_mate.ui.screens.graph
 
+import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
@@ -11,20 +12,26 @@ import com.example.track_mate.ADD_INFORMATION_SCREEN_TABLET
 import com.example.track_mate.DELETE_INFORMATION_SCREEN_TABLET
 import com.example.track_mate.HOME_SCREEN_PHONE
 import com.example.track_mate.HOME_SCREEN_TABLET
+import com.example.track_mate.PHONE_APP
 import com.example.track_mate.PRESENTATION_SCREEN_TABLET
 import com.example.track_mate.SEARCH_SCREEN_PHONE
 import com.example.track_mate.SEARCH_SCREEN_TABLET
 import com.example.track_mate.SETTING_SCREEN_TABLET
+import com.example.track_mate.SIGN_IN_SCREEN_PHONE
 import com.example.track_mate.SIGN_IN_SCREEN_TABLET
+import com.example.track_mate.SIGN_UP_SCREEN_PHONE
 import com.example.track_mate.SIGN_UP_SCREEN_TABLET
 import com.example.track_mate.SPLASH_SCREEN
 import com.example.track_mate.TABLET_APP
 import com.example.track_mate.TrackMateAppState
 import com.example.track_mate.core.model.Student
 import com.example.track_mate.ui.screens.SplashScreenProvider
+import com.example.track_mate.ui.screens.phone.PhoneApp
 import com.example.track_mate.ui.screens.phone.home_screen.HomeScreenPhone
 import com.example.track_mate.ui.screens.phone.search_screen.DetailScreenPhone
 import com.example.track_mate.ui.screens.phone.search_screen.SearchScreenPhone
+import com.example.track_mate.ui.screens.phone.sign_in_screen.SignInScreenPhoneProvider
+import com.example.track_mate.ui.screens.phone.sign_up_screen.SignUpScreenPhoneProvider
 import com.example.track_mate.ui.screens.tablet.TabletApp
 import com.example.track_mate.ui.screens.tablet.home_screen.HomeScreenTablet
 import com.example.track_mate.ui.screens.tablet.search_screen.AddActionScreen
@@ -36,6 +43,7 @@ import com.example.track_mate.ui.screens.tablet.setting_screen.SettingPresentati
 import com.example.track_mate.ui.screens.tablet.setting_screen.SettingScreenTablet
 import com.example.track_mate.ui.screens.tablet.sign_in_screen.SignInScreenProvider
 import com.example.track_mate.ui.screens.tablet.sign_up_screen.SignUpScreenProvider
+import com.example.track_mate.ui.screens.view_models.MainViewModel
 
 
 fun NavGraphBuilder.tabletGraph(appState: TrackMateAppState) {
@@ -50,17 +58,29 @@ fun NavGraphBuilder.tabletGraph(appState: TrackMateAppState) {
     }
 }
 
-fun NavGraphBuilder.topLevelTabletGraph(appState: TrackMateAppState) {
+fun NavGraphBuilder.topLevelTabletGraph(appState: TrackMateAppState, viewModel: MainViewModel) {
     composable(SPLASH_SCREEN) {
+        val isUserSignedOut = viewModel.getAuthState().collectAsState().value
+        val nextDestination = if (isUserSignedOut) {
+            SIGN_IN_SCREEN_TABLET
+        } else {
+            if (viewModel.isEmailVerified) {
+                TABLET_APP
+            } else {
+                SIGN_UP_SCREEN_TABLET // TODO: VERIFY_EMAIL_SCREEN
+            }
+        }
         SplashScreenProvider(popUpAndNavigate = {
             appState.navigateAndPopUp(
-                SIGN_UP_SCREEN_TABLET, SPLASH_SCREEN
+                nextDestination, SPLASH_SCREEN
             )
         })
     }
 
     composable(SIGN_UP_SCREEN_TABLET) {
-        SignUpScreenProvider()
+        SignUpScreenProvider(openAndPopUp = {
+            appState.navigateAndPopUp(SIGN_IN_SCREEN_TABLET, SIGN_UP_SCREEN_TABLET)
+        })
     }
     composable(SIGN_IN_SCREEN_TABLET) {
         SignInScreenProvider()
@@ -71,6 +91,29 @@ fun NavGraphBuilder.topLevelTabletGraph(appState: TrackMateAppState) {
     }
 
 
+}
+
+fun NavGraphBuilder.topLevelPhoneGraph(appState: TrackMateAppState) {
+    composable(SPLASH_SCREEN) {
+        SplashScreenProvider(popUpAndNavigate = {
+            appState.navigateAndPopUp(
+                SIGN_UP_SCREEN_PHONE, SPLASH_SCREEN
+            )
+        })
+    }
+    composable(SIGN_IN_SCREEN_PHONE) {
+        SignInScreenPhoneProvider()
+    }
+
+    composable(SIGN_UP_SCREEN_PHONE) {
+        SignUpScreenPhoneProvider(openAndPopUp = {
+            appState.navigateAndPopUp(SIGN_IN_SCREEN_PHONE, SIGN_UP_SCREEN_PHONE)
+        })
+    }
+
+    composable(PHONE_APP) {
+        PhoneApp()
+    }
 }
 
 fun NavGraphBuilder.searchScreenGraph(

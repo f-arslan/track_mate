@@ -11,11 +11,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -36,20 +41,28 @@ import com.example.track_mate.util.Constants.SMALL_MEDIUM_PADDING
 import com.example.track_mate.util.TrackMateIcons
 import com.example.track_mate.R.string as AppText
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreenPhoneProvider(viewModel: SignUpScreenViewModel = hiltViewModel()) {
+fun SignUpScreenPhoneProvider(
+    viewModel: SignUpScreenViewModel = hiltViewModel(), openAndPopUp: () -> Unit
+) {
     val uiState by viewModel.uiState
-    SignUpScreenPhone(uiState = uiState,
-        onFullNameChange = viewModel::onNameChange,
-        onEmailChange = viewModel::onEmailChange,
-        onPasswordChange = viewModel::onPasswordChange,
-        onRePasswordChange = viewModel::onRePasswordChange,
-        onSignUpClick = {})
+    val snackbarHostState = remember { SnackbarHostState() }
+    Scaffold(snackbarHost = { SnackbarHost(snackbarHostState) }) {
+        SignUpScreenPhone(Modifier.padding(it),
+            uiState = uiState,
+            onFullNameChange = viewModel::onNameChange,
+            onEmailChange = viewModel::onEmailChange,
+            onPasswordChange = viewModel::onPasswordChange,
+            onRePasswordChange = viewModel::onRePasswordChange,
+            onSignUpClick = { viewModel.onSignUpClick(snackbarHostState, openAndPopUp) })
+    }
 }
 
 
 @Composable
 fun SignUpScreenPhone(
+    modifier: Modifier,
     uiState: SignUpUiState,
     onFullNameChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,
@@ -83,8 +96,7 @@ fun FormSectionSignUpPhone(
 ) {
     Surface(modifier = modifier.fillMaxWidth()) {
         Column(
-            modifier = Modifier.fillMaxHeight(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(Modifier.padding(top = MEDIUM_PADDING))
             Text(
@@ -131,7 +143,7 @@ fun FormSectionSignUpPhone(
 @Composable
 fun PreviewSignUp() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        SignUpScreenPhone(uiState = SignUpUiState(), {}, {}, {}, {}, {})
+        SignUpScreenPhone(Modifier, uiState = SignUpUiState(), {}, {}, {}, {}, {})
     }
 }
 
