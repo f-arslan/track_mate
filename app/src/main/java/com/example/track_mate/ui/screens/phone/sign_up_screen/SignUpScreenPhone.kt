@@ -1,5 +1,6 @@
 package com.example.track_mate.ui.screens.phone.sign_up_screen
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,7 +23,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,13 +44,14 @@ import com.example.track_mate.util.Constants.SMALL_MEDIUM_PADDING
 import com.example.track_mate.util.TrackMateIcons
 import com.example.track_mate.R.string as AppText
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun SignUpScreenPhoneProvider(
     viewModel: SignUpScreenViewModel = hiltViewModel(), openAndPopUp: () -> Unit
 ) {
     val uiState by viewModel.uiState
     val snackbarHostState = remember { SnackbarHostState() }
+    val keyboard = LocalSoftwareKeyboardController.current
     Scaffold(snackbarHost = { SnackbarHost(snackbarHostState) }) {
         SignUpScreenPhone(Modifier.padding(it),
             uiState = uiState,
@@ -55,7 +59,10 @@ fun SignUpScreenPhoneProvider(
             onEmailChange = viewModel::onEmailChange,
             onPasswordChange = viewModel::onPasswordChange,
             onRePasswordChange = viewModel::onRePasswordChange,
-            onSignUpClick = { viewModel.onSignUpClick(snackbarHostState, openAndPopUp) })
+            onSignUpClick = {
+                keyboard?.hide()
+                viewModel.onSignUpClick(snackbarHostState, openAndPopUp)
+            })
     }
 }
 

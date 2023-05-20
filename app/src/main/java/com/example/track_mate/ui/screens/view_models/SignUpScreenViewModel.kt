@@ -14,6 +14,7 @@ import com.example.track_mate.core.model.service.SendEmailVerificationResponse
 import com.example.track_mate.core.model.service.SignUpResponse
 import com.example.track_mate.core.model.service.StorageService
 import com.example.track_mate.core.model.service.module.Response
+import com.example.track_mate.util.Constants.CHECK_YOUR_VERIFY
 import com.example.track_mate.util.Constants.EMAIL_ERROR
 import com.example.track_mate.util.Constants.PASSWORD_ERROR
 import com.example.track_mate.util.Constants.PASSWORD_MATCH_ERROR
@@ -30,10 +31,9 @@ data class SignUpUiState(
 
 @HiltViewModel
 class SignUpScreenViewModel @Inject constructor(
-    private val storageService: StorageService,
-    private val authRepository: AuthRepository
+    private val storageService: StorageService, private val authRepository: AuthRepository
 ) : AppViewModel() {
-    var uiState = mutableStateOf(SignUpUiState())
+    var uiState = mutableStateOf(SignUpUiState("Fatih", "f@gmail.com", "Mkal858858", "Mkal858858"))
         private set
 
     var signUpResponse by mutableStateOf<SignUpResponse>(Response.Success(false))
@@ -96,9 +96,28 @@ class SignUpScreenViewModel @Inject constructor(
                 )
                 return@launch
             }
-            signUpResponse = Response.Loading
-            signUpResponse = authRepository.firebaseSignUpWithEmailAndPassword(email, password)
-            openAndPopUp()
+            signUpWithEmailAndPassword(email, password)
+            if (signUpResponse is Response.Success) {
+                sendEmailVerification(snackbarHostState)
+                openAndPopUp()
+            }
+        }
+    }
+
+    private fun signUpWithEmailAndPassword(email: String, password: String) = viewModelScope.launch {
+        signUpResponse = Response.Loading
+        signUpResponse = authRepository.firebaseSignUpWithEmailAndPassword(email, password)
+    }
+
+    private fun sendEmailVerification(snackbarHostState: SnackbarHostState) = viewModelScope.launch {
+        sendEmailVerificationResponse = Response.Loading
+        sendEmailVerificationResponse = authRepository.sendEmailVerification()
+        if (sendEmailVerificationResponse is Response.Success) {
+            snackbarHostState.showSnackbar(
+                message = CHECK_YOUR_VERIFY,
+                duration = SnackbarDuration.Long,
+                withDismissAction = true
+            )
         }
     }
 }

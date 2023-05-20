@@ -56,6 +56,7 @@
     <string name="already_added">You already added this item</string>
     <string name="maximum_size_message">You reached the maximum number of items to delete</string>
     <string name="your_file_save_as_csv">Your file save as %s.csv</string>
+    <string name="verify_its_you">Verify it\'s you</string>
 
     <!-- FCM -->
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>

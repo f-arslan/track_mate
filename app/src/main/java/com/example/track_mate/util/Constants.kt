@@ -24,4 +24,5 @@ object Constants {
     const val EMAIL_ERROR = "Please insert a valid email."
     const val PASSWORD_ERROR = "Your password should have at least six digits and include one digit, one lower case letter and one upper case letter."
     const val PASSWORD_MATCH_ERROR = "Passwords do not match."
+    const val CHECK_YOUR_VERIFY = "Thank you for signing up! We have sent you a verification email. Please be sure to check your inbox for the email and, if necessary, your spam folder as well."
 }

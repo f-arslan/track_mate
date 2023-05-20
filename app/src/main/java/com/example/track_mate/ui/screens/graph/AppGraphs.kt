@@ -1,5 +1,6 @@
 package com.example.track_mate.ui.screens.graph
 
+import android.util.Log
 import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
@@ -65,9 +66,10 @@ fun NavGraphBuilder.topLevelTabletGraph(appState: TrackMateAppState, viewModel: 
             SIGN_IN_SCREEN_TABLET
         } else {
             if (viewModel.isEmailVerified) {
+                Log.d("TopLevelTablet", "topLevelTabletGraph: ${viewModel.isEmailVerified}")
                 TABLET_APP
             } else {
-                SIGN_UP_SCREEN_TABLET // TODO: VERIFY_EMAIL_SCREEN
+                TODO("Just show a message that the user is not verified")
             }
         }
         SplashScreenProvider(popUpAndNavigate = {
