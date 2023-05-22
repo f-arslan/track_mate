@@ -1,6 +1,5 @@
 package com.example.track_mate.ui.screens.phone.sign_up_screen
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

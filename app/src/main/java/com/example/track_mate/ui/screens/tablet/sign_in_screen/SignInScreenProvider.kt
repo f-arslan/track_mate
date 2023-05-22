@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -31,7 +32,6 @@ import com.example.track_mate.util.Constants.HIGH_PADDING
 import com.example.track_mate.util.Constants.MAX_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
-import com.example.track_mate.util.Constants.SMALL_PADDING
 import com.example.track_mate.util.Constants.VERY_MAX_PADDING
 import com.example.track_mate.util.TrackMateIcons
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -93,8 +93,7 @@ fun FormSectionSignIn(
             )
             Spacer(Modifier.padding(top = VERY_MAX_PADDING))
             Column(
-                modifier = Modifier.width(IntrinsicSize.Max),
-                horizontalAlignment = Alignment.End
+                modifier = Modifier.width(IntrinsicSize.Max), horizontalAlignment = Alignment.End
             ) {
                 EmailField(
                     value = uiState.email, placeholder = AppText.email, onNewValue = onEmailChange
@@ -112,15 +111,16 @@ fun FormSectionSignIn(
                 )
                 Spacer(Modifier.padding(top = HIGH_PADDING))
                 AppExtendedButton(
-                    Modifier.fillMaxWidth(), AppText.sign_in, TrackMateIcons.ForwardArrow, onSignInClick
+                    Modifier.fillMaxWidth(),
+                    AppText.sign_in,
+                    TrackMateIcons.ForwardArrow,
+                    onSignInClick
                 )
             }
             Spacer(Modifier.padding(top = VERY_MAX_PADDING))
-            Row {
-                Text(text = stringResource(AppText.not_a_member))
-                Spacer(Modifier.padding(end = SMALL_PADDING))
+            TextButton(onClick = {}) {
                 Text(
-                    text = stringResource(AppText.register_now),
+                    text = stringResource(AppText.not_a_member_register),
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onTertiaryContainer
                 )

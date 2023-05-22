@@ -45,6 +45,7 @@ import com.example.track_mate.ui.screens.tablet.setting_screen.SettingScreenTabl
 import com.example.track_mate.ui.screens.tablet.sign_in_screen.SignInScreenProvider
 import com.example.track_mate.ui.screens.tablet.sign_up_screen.SignUpScreenProvider
 import com.example.track_mate.ui.screens.view_models.MainViewModel
+import com.example.track_mate.util.Constants.CHECK_YOUR_VERIFY
 
 
 fun NavGraphBuilder.tabletGraph(appState: TrackMateAppState) {
@@ -59,22 +60,14 @@ fun NavGraphBuilder.tabletGraph(appState: TrackMateAppState) {
     }
 }
 
-fun NavGraphBuilder.topLevelTabletGraph(appState: TrackMateAppState, viewModel: MainViewModel) {
+fun NavGraphBuilder.topLevelTabletGraph(
+    appState: TrackMateAppState,
+    viewModel: MainViewModel,
+) {
     composable(SPLASH_SCREEN) {
-        val isUserSignedOut = viewModel.getAuthState().collectAsState().value
-        val nextDestination = if (isUserSignedOut) {
-            SIGN_IN_SCREEN_TABLET
-        } else {
-            if (viewModel.isEmailVerified) {
-                Log.d("TopLevelTablet", "topLevelTabletGraph: ${viewModel.isEmailVerified}")
-                TABLET_APP
-            } else {
-                TODO("Just show a message that the user is not verified")
-            }
-        }
         SplashScreenProvider(popUpAndNavigate = {
             appState.navigateAndPopUp(
-                nextDestination, SPLASH_SCREEN
+                SIGN_UP_SCREEN_TABLET, SPLASH_SCREEN
             )
         })
     }
@@ -91,24 +84,29 @@ fun NavGraphBuilder.topLevelTabletGraph(appState: TrackMateAppState, viewModel: 
     composable(TABLET_APP) {
         TabletApp()
     }
-
-
 }
 
-fun NavGraphBuilder.topLevelPhoneGraph(appState: TrackMateAppState) {
+fun NavGraphBuilder.topLevelPhoneGraph(
+    appState: TrackMateAppState, viewModel: MainViewModel
+) {
     composable(SPLASH_SCREEN) {
         SplashScreenProvider(popUpAndNavigate = {
-            appState.navigateAndPopUp(
-                SIGN_UP_SCREEN_PHONE, SPLASH_SCREEN
-            )
+            if (viewModel.isEmailVerified) {
+                appState.navigateAndPopUp(PHONE_APP, SPLASH_SCREEN)
+            } else {
+                appState.navigateAndPopUp(SIGN_IN_SCREEN_PHONE, SPLASH_SCREEN)
+            }
         })
     }
     composable(SIGN_IN_SCREEN_PHONE) {
-        SignInScreenPhoneProvider()
+        SignInScreenPhoneProvider(onRegisterClick = {
+            appState.navigateAndPopUp(SIGN_UP_SCREEN_PHONE, SIGN_IN_SCREEN_PHONE)
+        })
     }
 
     composable(SIGN_UP_SCREEN_PHONE) {
         SignUpScreenPhoneProvider(openAndPopUp = {
+            viewModel.updateSnackbarMessage(CHECK_YOUR_VERIFY)
             appState.navigateAndPopUp(SIGN_IN_SCREEN_PHONE, SIGN_UP_SCREEN_PHONE)
         })
     }

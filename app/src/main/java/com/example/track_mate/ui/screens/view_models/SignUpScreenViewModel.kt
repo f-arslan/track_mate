@@ -14,11 +14,11 @@ import com.example.track_mate.core.model.service.SendEmailVerificationResponse
 import com.example.track_mate.core.model.service.SignUpResponse
 import com.example.track_mate.core.model.service.StorageService
 import com.example.track_mate.core.model.service.module.Response
-import com.example.track_mate.util.Constants.CHECK_YOUR_VERIFY
 import com.example.track_mate.util.Constants.EMAIL_ERROR
 import com.example.track_mate.util.Constants.PASSWORD_ERROR
 import com.example.track_mate.util.Constants.PASSWORD_MATCH_ERROR
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -33,7 +33,11 @@ data class SignUpUiState(
 class SignUpScreenViewModel @Inject constructor(
     private val storageService: StorageService, private val authRepository: AuthRepository
 ) : AppViewModel() {
-    var uiState = mutableStateOf(SignUpUiState("Fatih", "f@gmail.com", "Mkal858858", "Mkal858858"))
+    var uiState = mutableStateOf(
+        SignUpUiState(
+            "Fatih", "fatiharslanedu@gmail.com", "Mkal858858", "Mkal858858"
+        )
+    )
         private set
 
     var signUpResponse by mutableStateOf<SignUpResponse>(Response.Success(false))
@@ -69,7 +73,7 @@ class SignUpScreenViewModel @Inject constructor(
 
     fun onSignUpClick(
         snackbarHostState: SnackbarHostState,
-        openAndPopUp: () -> Unit,
+        openAndPopUp: () -> Unit
     ) {
         viewModelScope.launch {
             if (!email.isValidEmail()) {
@@ -96,28 +100,19 @@ class SignUpScreenViewModel @Inject constructor(
                 )
                 return@launch
             }
-            signUpWithEmailAndPassword(email, password)
-            if (signUpResponse is Response.Success) {
-                sendEmailVerification(snackbarHostState)
-                openAndPopUp()
-            }
+            async { signUpWithEmailAndPassword(email, password) }.await()
+            async { sendEmailVerification() }.await()
+            openAndPopUp()
         }
     }
 
-    private fun signUpWithEmailAndPassword(email: String, password: String) = viewModelScope.launch {
+    private suspend fun signUpWithEmailAndPassword(email: String, password: String) {
         signUpResponse = Response.Loading
         signUpResponse = authRepository.firebaseSignUpWithEmailAndPassword(email, password)
     }
 
-    private fun sendEmailVerification(snackbarHostState: SnackbarHostState) = viewModelScope.launch {
+    private suspend fun sendEmailVerification() {
         sendEmailVerificationResponse = Response.Loading
         sendEmailVerificationResponse = authRepository.sendEmailVerification()
-        if (sendEmailVerificationResponse is Response.Success) {
-            snackbarHostState.showSnackbar(
-                message = CHECK_YOUR_VERIFY,
-                duration = SnackbarDuration.Long,
-                withDismissAction = true
-            )
-        }
     }
 }

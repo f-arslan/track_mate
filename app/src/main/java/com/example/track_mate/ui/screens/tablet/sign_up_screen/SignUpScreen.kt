@@ -44,8 +44,7 @@ import com.example.track_mate.R.string as AppText
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpScreenProvider(
-    viewModel: SignUpScreenViewModel = hiltViewModel(),
-    openAndPopUp: () -> Unit
+    viewModel: SignUpScreenViewModel = hiltViewModel(), openAndPopUp: () -> Unit
 ) {
     val uiState by viewModel.uiState
     val snackbarHostState = remember { SnackbarHostState() }

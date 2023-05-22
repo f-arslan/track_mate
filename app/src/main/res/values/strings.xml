@@ -28,8 +28,7 @@
     <string name="hello_again">Hello Again!</string>
     <string name="welcome_back_you_have_been_missed">Welcome back you’ve been missed!</string>
     <string name="recovery_password">Recovery Password</string>
-    <string name="not_a_member">Not a member?</string>
-    <string name="register_now">Register now</string>
+    <string name="not_a_member_register">Not a member? Register now</string>
     <string name="display_text">Stay organized and on top of your schedule with our student check-in system - the perfect tool for busy students!</string>
     <string name="ok">OK</string>
 
