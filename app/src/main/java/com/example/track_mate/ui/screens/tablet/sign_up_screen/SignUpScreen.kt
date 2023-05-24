@@ -126,7 +126,7 @@ fun FormSectionSignUp(
             }
             Spacer(Modifier.height(VERY_MAX_PADDING))
             Row {
-                Text(stringResource(AppText.have_an_account))
+                Text(stringResource(AppText.have_an_account_login))
                 Spacer(modifier = Modifier.width(SMALL_PADDING))
                 Text(
                     stringResource(AppText.login),

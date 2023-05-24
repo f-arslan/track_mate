@@ -1,5 +1,6 @@
 package com.example.track_mate.ui.screens.view_models
 
+import android.util.Log
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.getValue
@@ -18,6 +19,7 @@ import com.example.track_mate.util.Constants.EMAIL_ERROR
 import com.example.track_mate.util.Constants.PASSWORD_ERROR
 import com.example.track_mate.util.Constants.PASSWORD_MATCH_ERROR
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -40,9 +42,8 @@ class SignUpScreenViewModel @Inject constructor(
     )
         private set
 
-    var signUpResponse by mutableStateOf<SignUpResponse>(Response.Success(false))
-        private set
-    var sendEmailVerificationResponse by mutableStateOf<SendEmailVerificationResponse>(
+    private var signUpResponse by mutableStateOf<SignUpResponse>(Response.Success(false))
+    private var sendEmailVerificationResponse by mutableStateOf<SendEmailVerificationResponse>(
         Response.Success(
             false
         )
@@ -72,35 +73,36 @@ class SignUpScreenViewModel @Inject constructor(
     }
 
     fun onSignUpClick(
-        snackbarHostState: SnackbarHostState,
-        openAndPopUp: () -> Unit
+        snackbarHostState: SnackbarHostState, openAndPopUp: () -> Unit
     ) {
+        fun showSnackbar(message: String, duration: SnackbarDuration) {
+            viewModelScope.launch {
+                snackbarHostState.showSnackbar(
+                    message = message, duration = duration, withDismissAction = true
+                )
+            }
+        }
+        if (!email.isValidEmail()) {
+            showSnackbar(EMAIL_ERROR, SnackbarDuration.Short)
+            return
+        }
+        if (!password.isValidPassword()) {
+            showSnackbar(PASSWORD_ERROR, SnackbarDuration.Short)
+            return
+        }
+        if (!password.passwordMatches(uiState.value.rePassword)) {
+            showSnackbar(PASSWORD_MATCH_ERROR, SnackbarDuration.Short)
+            return
+        }
         viewModelScope.launch {
-            if (!email.isValidEmail()) {
-                snackbarHostState.showSnackbar(
-                    message = EMAIL_ERROR,
-                    duration = SnackbarDuration.Short,
-                    withDismissAction = true
-                )
-                return@launch
-            }
-            if (!password.isValidPassword()) {
-                snackbarHostState.showSnackbar(
-                    message = PASSWORD_ERROR,
-                    duration = SnackbarDuration.Indefinite,
-                    withDismissAction = true
-                )
-                return@launch
-            }
-            if (!password.passwordMatches(uiState.value.rePassword)) {
-                snackbarHostState.showSnackbar(
-                    message = PASSWORD_MATCH_ERROR,
-                    duration = SnackbarDuration.Short,
-                    withDismissAction = true
-                )
-                return@launch
-            }
             async { signUpWithEmailAndPassword(email, password) }.await()
+            if (signUpResponse is Response.Failure) {
+                showSnackbar(
+                    (signUpResponse as Response.Failure).e.message ?: "",
+                    SnackbarDuration.Short
+                )
+                return@launch
+            }
             async { sendEmailVerification() }.await()
             openAndPopUp()
         }

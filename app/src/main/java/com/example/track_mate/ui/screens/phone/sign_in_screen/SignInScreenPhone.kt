@@ -32,7 +32,6 @@ import com.example.track_mate.common.composables.InformationHeader
 import com.example.track_mate.common.composables.PasswordField
 import com.example.track_mate.ui.screens.view_models.SignInUiState
 import com.example.track_mate.ui.screens.view_models.SignInViewModel
-import com.example.track_mate.util.Constants.HIGH_PADDING
 import com.example.track_mate.util.Constants.MAX_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
@@ -53,6 +52,7 @@ fun SignInScreenPhoneProvider(
             onEmailChange = viewModel::onEmailChange,
             onPasswordChange = viewModel::onPasswordChange,
             onSignInClick = { viewModel.onSignInClick() },
+            onForgotPasswordClick = {},
             onRegisterClick = onRegisterClick
         )
     }
@@ -65,16 +65,18 @@ fun SignInScreenPhone(
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onSignInClick: () -> Unit,
+    onForgotPasswordClick: () -> Unit,
     onRegisterClick: () -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        InformationHeader(Modifier.fillMaxHeight(0.3f))
+    Column(modifier = modifier.fillMaxSize()) {
+        InformationHeader(Modifier.fillMaxHeight(0.2f))
         FormSectionSignInPhone(
             Modifier.fillMaxHeight(),
             uiState,
             onEmailChange,
             onPasswordChange,
             onSignInClick,
+            onForgotPasswordClick,
             onRegisterClick
         )
     }
@@ -87,34 +89,24 @@ fun FormSectionSignInPhone(
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onSignInClick: () -> Unit,
+    onForgotPasswordClick: () -> Unit,
     onRegisterClick: () -> Unit
 ) {
     Surface(modifier = modifier.fillMaxWidth()) {
         Column(
             modifier = Modifier.fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(Modifier.padding(top = MEDIUM_PADDING))
-            Text(
-                text = stringResource(AppText.hello_again),
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.SemiBold
-            )
-            Spacer(Modifier.padding(top = MEDIUM_PADDING))
-            Text(
-                text = stringResource(AppText.welcome_back_you_have_been_missed),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Normal
-            )
             Spacer(Modifier.padding(top = MAX_PADDING))
             EmailField(uiState.email, AppText.email, onEmailChange)
             Spacer(Modifier.padding(top = MEDIUM_HIGH_PADDING))
             Column(Modifier.width(IntrinsicSize.Max), horizontalAlignment = Alignment.End) {
                 PasswordField(uiState.password, AppText.password, onPasswordChange)
+                TextButton(onClick = onForgotPasswordClick) {
+                    Text(
+                        text = stringResource(AppText.forgot_password), fontWeight = FontWeight.SemiBold
+                    )
+                }
                 Spacer(Modifier.padding(top = MEDIUM_PADDING))
-                Text(
-                    text = stringResource(AppText.forgot_password), fontWeight = FontWeight.SemiBold
-                )
-                Spacer(Modifier.padding(top = HIGH_PADDING))
                 AppExtendedButton(
                     modifier = Modifier.fillMaxWidth(),
                     AppText.sign_in,
@@ -139,6 +131,6 @@ fun FormSectionSignInPhone(
 @Composable
 fun PreviewScreen() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        SignInScreenPhone(Modifier, uiState = SignInUiState(), {}, {}, {}, {})
+        SignInScreenPhone(Modifier, uiState = SignInUiState(), {}, {}, {}, {}, {})
     }
 }

@@ -22,14 +22,16 @@
     <string name="successfully_uploaded">Successfully uploaded</string>
     <string name="sections">Sections</string>
     <string name="results">Results</string>
-    <string name="have_an_account">Have an account?</string>
+    <string name="have_an_account_login">Have an account? Login</string>
     <string name="login">Login</string>
     <string name="display_title">Student Check-in</string>
     <string name="hello_again">Hello Again!</string>
     <string name="welcome_back_you_have_been_missed">Welcome back you’ve been missed!</string>
+    <string name="welcome_back">Welcome back</string>
     <string name="recovery_password">Recovery Password</string>
     <string name="not_a_member_register">Not a member? Register now</string>
     <string name="display_text">Stay organized and on top of your schedule with our student check-in system - the perfect tool for busy students!</string>
+    <string name="display_text_phone">Perfect tool for busy students!</string>
     <string name="ok">OK</string>
 
     <!-- Common -->

@@ -1,7 +1,5 @@
 package com.example.track_mate.ui.screens.graph
 
-import android.util.Log
-import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
@@ -108,6 +106,10 @@ fun NavGraphBuilder.topLevelPhoneGraph(
         SignUpScreenPhoneProvider(openAndPopUp = {
             viewModel.updateSnackbarMessage(CHECK_YOUR_VERIFY)
             appState.navigateAndPopUp(SIGN_IN_SCREEN_PHONE, SIGN_UP_SCREEN_PHONE)
+        }, onHaveAnAccountClick = {
+            appState.navigateAndPopUp(
+                SIGN_IN_SCREEN_PHONE, SIGN_UP_SCREEN_PHONE
+            )
         })
     }
 

@@ -1,10 +1,8 @@
 package com.example.track_mate.ui.screens.phone.sign_up_screen
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +16,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -39,20 +38,22 @@ import com.example.track_mate.util.Constants.HIGH_PADDING
 import com.example.track_mate.util.Constants.MAX_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_HIGH_PADDING
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
-import com.example.track_mate.util.Constants.SMALL_MEDIUM_PADDING
 import com.example.track_mate.util.TrackMateIcons
 import com.example.track_mate.R.string as AppText
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun SignUpScreenPhoneProvider(
-    viewModel: SignUpScreenViewModel = hiltViewModel(), openAndPopUp: () -> Unit
+    viewModel: SignUpScreenViewModel = hiltViewModel(),
+    openAndPopUp: () -> Unit,
+    onHaveAnAccountClick: () -> Unit
 ) {
     val uiState by viewModel.uiState
     val snackbarHostState = remember { SnackbarHostState() }
     val keyboard = LocalSoftwareKeyboardController.current
     Scaffold(snackbarHost = { SnackbarHost(snackbarHostState) }) {
-        SignUpScreenPhone(Modifier.padding(it),
+        SignUpScreenPhone(
+            Modifier.padding(it),
             uiState = uiState,
             onFullNameChange = viewModel::onNameChange,
             onEmailChange = viewModel::onEmailChange,
@@ -61,7 +62,9 @@ fun SignUpScreenPhoneProvider(
             onSignUpClick = {
                 keyboard?.hide()
                 viewModel.onSignUpClick(snackbarHostState, openAndPopUp)
-            })
+            },
+            onHaveAccountClick = onHaveAnAccountClick
+        )
     }
 }
 
@@ -74,10 +77,11 @@ fun SignUpScreenPhone(
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onRePasswordChange: (String) -> Unit,
-    onSignUpClick: () -> Unit
+    onSignUpClick: () -> Unit,
+    onHaveAccountClick: () -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        InformationHeader(Modifier.fillMaxHeight(0.3f))
+    Column(modifier = modifier.fillMaxSize()) {
+        InformationHeader(Modifier.fillMaxHeight(0.2f))
         FormSectionSignUpPhone(
             Modifier.fillMaxHeight(1f),
             uiState,
@@ -85,7 +89,8 @@ fun SignUpScreenPhone(
             onEmailChange,
             onPasswordChange,
             onRePasswordChange,
-            onSignUpClick
+            onSignUpClick,
+            onHaveAccountClick
         )
     }
 }
@@ -98,7 +103,8 @@ fun FormSectionSignUpPhone(
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onRePasswordChange: (String) -> Unit,
-    onSignUpClick: () -> Unit
+    onSignUpClick: () -> Unit,
+    onHaveAccountClick: () -> Unit,
 ) {
     Surface(modifier = modifier.fillMaxWidth()) {
         Column(
@@ -128,16 +134,11 @@ fun FormSectionSignUpPhone(
                 )
             }
             Spacer(Modifier.padding(top = MAX_PADDING))
-            Row(horizontalArrangement = Arrangement.spacedBy(SMALL_MEDIUM_PADDING)) {
+            TextButton(onClick = onHaveAccountClick) {
                 Text(
-                    text = stringResource(AppText.have_an_account),
-                    style = MaterialTheme.typography.bodyLarge
-                )
-                Text(
-                    text = stringResource(AppText.login),
-                    color = MaterialTheme.colorScheme.surfaceTint,
-                    fontWeight = FontWeight.SemiBold,
-                    style = MaterialTheme.typography.bodyLarge
+                    text = stringResource(AppText.have_an_account_login),
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.SemiBold
                 )
             }
         }
@@ -149,7 +150,7 @@ fun FormSectionSignUpPhone(
 @Composable
 fun PreviewSignUp() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        SignUpScreenPhone(Modifier, uiState = SignUpUiState(), {}, {}, {}, {}, {})
+        SignUpScreenPhone(Modifier, uiState = SignUpUiState(), {}, {}, {}, {}, {}, {})
     }
 }
 

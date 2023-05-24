@@ -32,4 +32,7 @@ class MainViewModel @Inject constructor(
     private fun getAuthState() = authRepository.getAuthState(viewModelScope)
 
     val isEmailVerified get() = authRepository.currentUser?.isEmailVerified ?: false
+    fun print() {
+        Log.d("MainViewModel", "${authRepository.currentUser?.email} ${authRepository.currentUser?.isEmailVerified}")
+    }
 }
