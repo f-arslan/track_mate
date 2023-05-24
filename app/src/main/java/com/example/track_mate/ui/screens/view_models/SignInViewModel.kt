@@ -1,6 +1,7 @@
 package com.example.track_mate.ui.screens.view_models
 
-import android.util.Log
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -42,7 +43,14 @@ class SignInViewModel @Inject constructor(
         uiState.value = uiState.value.copy(password = newValue)
     }
 
-    fun onSignInClick() {
+    fun onSignInClick(snackbarHostState: SnackbarHostState, openAndPopUp: () -> Unit) {
+        fun showSnackbar(message: String, duration: SnackbarDuration = SnackbarDuration.Short) {
+            viewModelScope.launch {
+                snackbarHostState.showSnackbar(
+                    message = message, duration = duration, withDismissAction = true
+                )
+            }
+        }
         if (!email.isValidEmail()) {
             return
         }
@@ -51,7 +59,11 @@ class SignInViewModel @Inject constructor(
         }
         viewModelScope.launch {
             async { signInWithEmailAndPassword(email, password) }.await()
-            Log.d("SignInViewModel", "onSignInClick: $signInResponse")
+            if (signInResponse is Response.Failure) {
+                (signInResponse as Response.Failure).e.message?.let { showSnackbar(it) }
+                return@launch
+            }
+            openAndPopUp()
         }
     }
 

@@ -41,7 +41,9 @@ import com.example.track_mate.R.string as AppText
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignInScreenPhoneProvider(
-    viewModel: SignInViewModel = hiltViewModel(), onRegisterClick: () -> Unit
+    viewModel: SignInViewModel = hiltViewModel(),
+    onRegisterClick: () -> Unit,
+    onSignInClick: () -> Unit
 ) {
     val uiState by viewModel.uiState
     val snackbarHostState = remember { SnackbarHostState() }
@@ -51,7 +53,7 @@ fun SignInScreenPhoneProvider(
             uiState,
             onEmailChange = viewModel::onEmailChange,
             onPasswordChange = viewModel::onPasswordChange,
-            onSignInClick = { viewModel.onSignInClick() },
+            onSignInClick = { viewModel.onSignInClick(snackbarHostState) { onSignInClick() } },
             onForgotPasswordClick = {},
             onRegisterClick = onRegisterClick
         )
@@ -103,7 +105,8 @@ fun FormSectionSignInPhone(
                 PasswordField(uiState.password, AppText.password, onPasswordChange)
                 TextButton(onClick = onForgotPasswordClick) {
                     Text(
-                        text = stringResource(AppText.forgot_password), fontWeight = FontWeight.SemiBold
+                        text = stringResource(AppText.forgot_password),
+                        fontWeight = FontWeight.SemiBold
                     )
                 }
                 Spacer(Modifier.padding(top = MEDIUM_PADDING))

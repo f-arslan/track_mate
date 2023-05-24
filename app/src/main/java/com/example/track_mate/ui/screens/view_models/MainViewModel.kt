@@ -18,7 +18,7 @@ class MainViewModel @Inject constructor(
 
     init {
         getAuthState()
-        // print()
+        print()
     }
 
     fun updateSnackbarMessage(message: String) {

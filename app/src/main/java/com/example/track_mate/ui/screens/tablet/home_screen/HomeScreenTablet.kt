@@ -32,7 +32,6 @@ fun HomeScreenTablet(
 
     SurfaceWrapper(
         modifier = Modifier.padding(HIGH_PADDING),
-        tonalElevation = VERY_SMALL_PADDING
     ) {
         Scaffold(topBar = {
             TrackMateTopAppBar(

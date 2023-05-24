@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.Dp
 import com.example.track_mate.util.Constants.MEDIUM_PADDING
 import com.example.track_mate.util.Constants.NO_PADDING
 import com.example.track_mate.util.Constants.SMALL_PADDING
+import com.example.track_mate.util.Constants.VERY_SMALL_PADDING
 
 @Composable
 fun ActionSurfaceWrapper(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
@@ -15,6 +16,7 @@ fun ActionSurfaceWrapper(modifier: Modifier = Modifier, content: @Composable () 
         modifier = modifier,
         shape = RoundedCornerShape(MEDIUM_PADDING),
         shadowElevation = SMALL_PADDING,
+        tonalElevation = VERY_SMALL_PADDING
     ) {
         content()
     }

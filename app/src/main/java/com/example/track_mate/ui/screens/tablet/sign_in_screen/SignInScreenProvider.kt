@@ -10,12 +10,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -37,26 +42,36 @@ import com.example.track_mate.util.TrackMateIcons
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.example.track_mate.R.string as AppText
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignInScreenProvider(viewModel: SignInViewModel = hiltViewModel()) {
+fun SignInScreenProvider(viewModel: SignInViewModel = hiltViewModel(), openAndPopUp: () -> Unit) {
     val uiState by viewModel.uiState
     rememberSystemUiController().setStatusBarColor(MaterialTheme.colorScheme.surfaceTint)
-    SignInScreen(
-        uiState,
-        onEmailChange = viewModel::onEmailChange,
-        onPasswordChange = viewModel::onPasswordChange,
-        onSignInClick = viewModel::onSignInClick
-    )
+    val snackbarHostState = remember { SnackbarHostState() }
+    Scaffold(snackbarHost = { SnackbarHost(snackbarHostState) }) {
+        SignInScreen(
+            modifier = Modifier.padding(it),
+            uiState,
+            onEmailChange = viewModel::onEmailChange,
+            onPasswordChange = viewModel::onPasswordChange,
+            onSignInClick = {
+                viewModel.onSignInClick(snackbarHostState) {
+                    openAndPopUp()
+                }
+            },
+        )
+    }
 }
 
 @Composable
 fun SignInScreen(
+    modifier: Modifier,
     uiState: SignInUiState,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onSignInClick: () -> Unit
 ) {
-    Surface(modifier = Modifier.fillMaxSize()) {
+    Surface(modifier = modifier.fillMaxSize()) {
         Row {
             InformationSection(modifier = Modifier.weight(0.5f))
             FormSectionSignIn(
@@ -136,6 +151,6 @@ fun SignInPreview() {
     Column(
         verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        SignInScreen(SignInUiState(), {}, {}, {})
+        SignInScreen(Modifier, SignInUiState(), {}, {}, {})
     }
 }

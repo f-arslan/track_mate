@@ -64,9 +64,11 @@ fun NavGraphBuilder.topLevelTabletGraph(
 ) {
     composable(SPLASH_SCREEN) {
         SplashScreenProvider(popUpAndNavigate = {
-            appState.navigateAndPopUp(
-                SIGN_UP_SCREEN_TABLET, SPLASH_SCREEN
-            )
+            if (viewModel.isEmailVerified) {
+                appState.navigateAndPopUp(TABLET_APP, SPLASH_SCREEN)
+            } else {
+                appState.navigateAndPopUp(SIGN_IN_SCREEN_TABLET, SPLASH_SCREEN)
+            }
         })
     }
 
@@ -76,7 +78,9 @@ fun NavGraphBuilder.topLevelTabletGraph(
         })
     }
     composable(SIGN_IN_SCREEN_TABLET) {
-        SignInScreenProvider()
+        SignInScreenProvider(openAndPopUp = {
+            appState.navigateAndPopUp(TABLET_APP, SIGN_IN_SCREEN_TABLET)
+        })
     }
 
     composable(TABLET_APP) {
@@ -99,6 +103,8 @@ fun NavGraphBuilder.topLevelPhoneGraph(
     composable(SIGN_IN_SCREEN_PHONE) {
         SignInScreenPhoneProvider(onRegisterClick = {
             appState.navigateAndPopUp(SIGN_UP_SCREEN_PHONE, SIGN_IN_SCREEN_PHONE)
+        }, onSignInClick = {
+            appState.navigateAndPopUp(PHONE_APP, SIGN_IN_SCREEN_PHONE)
         })
     }
 

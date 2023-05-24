@@ -34,7 +34,7 @@ fun SplashScreen(composition: LottieComposition?, popUpAndNavigate: () -> Unit) 
         contentAlignment = Alignment.Center
     ) {
         val logoAnimationState =
-            animateLottieCompositionAsState(composition = composition, speed = 2.5f)
+            animateLottieCompositionAsState(composition = composition, speed = 3f)
         LottieAnimation(
             composition = composition,
             progress = { logoAnimationState.progress },

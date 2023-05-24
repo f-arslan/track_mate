@@ -16,7 +16,7 @@ fun TabletApp() {
         AppNavRail(appState::clearAndNavigate)
         NavHost(
             navController = appState.navController,
-            startDestination = SPLASH_SCREEN
+            startDestination = SEARCH_SCREEN_TABLET.route
         ) {
             tabletGraph(appState)
         }
